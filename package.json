@@ -1,0 +1,26 @@
+{
+  "name": "gate-marketing",
+  "private": true,
+  "scripts": {
+    "dev": "NODE_OPTIONS=--max-old-space-size=12288 next dev --hostname 127.0.0.1",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1",
+    "test:contact": "node --experimental-strip-types sanity/lib/contactSubmission.test.ts"
+  },
+  "dependencies": {
+    "@portabletext/react": "^8.0.0",
+    "@sanity/image-url": "^2.1.1",
+    "next": "latest",
+    "next-sanity": "^13.3.2",
+    "react": "latest",
+    "react-dom": "latest",
+    "sanity": "^6.9.2",
+    "styled-components": "^6.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "latest"
+  }
+}

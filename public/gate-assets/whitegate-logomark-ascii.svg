@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="slit">
+      <path d="M522 184C506 282 490 372 494 470c4 128 44 242 106 352-88-112-188-210-200-314-12-108 54-198 96-274 14-26 23-45 26-50Z"/>
+    </clipPath>
+    <pattern id="ascii" width="52" height="44" patternUnits="userSpaceOnUse">
+      <path fill="#f5f4ef" fill-rule="evenodd" d="M3 5h17v32H3V5Zm5 5v22h7V10H8Z"/>
+      <path fill="#f5f4ef" d="m28 12 8-7h6v32h-7V13l-7 5v-6Z"/>
+    </pattern>
+    <pattern id="signal" width="52" height="44" patternUnits="userSpaceOnUse">
+      <path fill="#06f" d="m3 12 8-7h6v32h-7V13l-7 5v-6Z"/>
+      <path fill="#06f" fill-rule="evenodd" d="M29 5h17v32H29V5Zm5 5v22h7V10h-7Z"/>
+    </pattern>
+  </defs>
+  <rect width="1024" height="1024" fill="#171717"/>
+  <rect x="108" y="108" width="808" height="808" rx="210" fill="#f5f4ef"/>
+  <path d="M522 184C506 282 490 372 494 470c4 128 44 242 106 352-88-112-188-210-200-314-12-108 54-198 96-274 14-26 23-45 26-50Z" fill="#171717"/>
+  <g clip-path="url(#slit)">
+    <rect x="360" y="150" width="280" height="700" fill="url(#ascii)"/>
+    <rect x="500" y="150" width="112" height="700" fill="url(#signal)"/>
+  </g>
+</svg>

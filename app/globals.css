@@ -269,13 +269,37 @@ html.w-mod-js:not(.w-mod-ix3) :is(.team-card-position, .install-process-line) { 
   .navbar .hero-top-logo-img.whitegate-wordmark {
     height: auto;
     color: var(--_color---neutral--grey-09);
+    font-family: var(--font-family--font-pixel);
     font-size: 1rem;
-    font-weight: var(--font-weight--semibold);
+    font-weight: var(--font-weight--normal);
   }
 
   .navbar .navbar-brand-link {
     width: auto;
     flex: none;
+    align-self: center;
+  }
+
+  .section .hiw-ray {
+    height: 300svh;
+  }
+
+  .hiw-ray > .hiw-layout {
+    height: 100%;
+  }
+
+  .hiw-ray .eyebrow-section {
+    flex: none;
+  }
+
+  .hiw-ray .hiw-main {
+    min-height: 0;
+    flex: 1;
+  }
+
+  .hiw-ray .hiw-slider {
+    position: sticky;
+    top: calc((100svh - 20rem) / 2);
   }
 
   .footer .footer-layout {
@@ -314,6 +338,16 @@ html.w-mod-js:not(.w-mod-ix3) :is(.team-card-position, .install-process-line) { 
 
   .footer .footer-bottom-credit {
     justify-self: auto;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .hero-heading > .hero-heading-highlight {
+    font-size: 11vw;
+  }
+
+  .hiw-ray .hiw-slider {
+    top: calc((100svh - 21rem) / 2);
   }
 }
 

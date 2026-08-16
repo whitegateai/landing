@@ -23,10 +23,26 @@ window.addEventListener('load', function () {
 
     const color = getComputedStyle(el).color
     el.textContent = ''
+    el.style.display = 'inline-grid'
+    el.style.verticalAlign = 'baseline'
+
+    const reserve = document.createElement('span')
+    reserve.setAttribute('aria-hidden', 'true')
+    reserve.setAttribute('style', 'display:inline-grid;grid-area:1/1;visibility:hidden;white-space:nowrap;padding-right:.6em')
+    words.forEach(word => {
+      const option = document.createElement('span')
+      option.setAttribute('style', 'grid-area:1/1')
+      option.textContent = word
+      reserve.appendChild(option)
+    })
+
+    const live = document.createElement('span')
+    live.setAttribute('style', 'grid-area:1/1;white-space:nowrap')
     const cursor = document.createElement('span')
     cursor.setAttribute('style', 'display:inline-block;width:.55em;height:1em;background:' + color + ';vertical-align:middle;margin-left:2px;position:relative;top:-.05em;opacity:0')
     const text = document.createTextNode('')
-    el.append(text, cursor)
+    live.append(text, cursor)
+    el.append(reserve, live)
 
     function type() {
       const word = words[wordIndex]
@@ -366,6 +382,7 @@ function installHowItWorksScroll() {
   const sync = () => {
     const viewport = window.innerHeight;
     const narrow = window.matchMedia("(max-width: 991px)").matches;
+    const mobile = window.matchMedia("(max-width: 767px)").matches;
 
     rays.forEach((ray) => {
       const cards = Array.from(ray.querySelectorAll<HTMLElement>(".hiw-card-wrap > .hiw-card"));
@@ -374,7 +391,7 @@ function installHowItWorksScroll() {
       if (count === 0) return;
 
       const rect = ray.getBoundingClientRect();
-      const startOffset = narrow ? viewport * 0.65 : 0;
+      const startOffset = mobile ? viewport * 0.05 : narrow ? viewport * 0.65 : 0;
       const range = Math.max(ray.offsetHeight - viewport + startOffset, viewport * 0.75);
       const progress = clamp01((startOffset - rect.top) / range);
       const scaled = progress * count;
@@ -427,6 +444,7 @@ function installCapabilitiesAutoTabs() {
 
       const menu = root.querySelector<HTMLElement>(".capabilities-tabs-menu");
       const media = root.querySelector<HTMLElement>(".capabilities-grid-right.w-tab-content");
+      const mobile = window.matchMedia("(max-width: 767px)");
       let timer = 0;
       let heightFrame = 0;
       let index = Math.max(
@@ -485,6 +503,7 @@ function installCapabilitiesAutoTabs() {
 
       const schedule = () => {
         window.clearTimeout(timer);
+        if (mobile.matches) return;
         timer = window.setTimeout(() => {
           index = (index + 1) % links.length;
           sync();
@@ -504,6 +523,7 @@ function installCapabilitiesAutoTabs() {
 
       root.addEventListener("click", onClick);
       window.addEventListener("resize", scheduleHeightSync);
+      mobile.addEventListener("change", schedule);
       sync();
       schedule();
 
@@ -512,6 +532,7 @@ function installCapabilitiesAutoTabs() {
         if (heightFrame) window.cancelAnimationFrame(heightFrame);
         root.removeEventListener("click", onClick);
         window.removeEventListener("resize", scheduleHeightSync);
+        mobile.removeEventListener("change", schedule);
       };
     })
     .filter((cleanup): cleanup is () => void => Boolean(cleanup));

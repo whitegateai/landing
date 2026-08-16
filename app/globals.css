@@ -342,10 +342,6 @@ html.w-mod-js:not(.w-mod-ix3) :is(.team-card-position, .install-process-line) { 
 }
 
 @media screen and (max-width: 479px) {
-  .hero-heading > .hero-heading-highlight {
-    font-size: 11vw;
-  }
-
   .hiw-ray .hiw-slider {
     top: calc((100svh - 21rem) / 2);
   }

@@ -23,26 +23,10 @@ window.addEventListener('load', function () {
 
     const color = getComputedStyle(el).color
     el.textContent = ''
-    el.style.display = 'inline-grid'
-    el.style.verticalAlign = 'baseline'
-
-    const reserve = document.createElement('span')
-    reserve.setAttribute('aria-hidden', 'true')
-    reserve.setAttribute('style', 'display:inline-grid;grid-area:1/1;visibility:hidden;white-space:nowrap;padding-right:.6em')
-    words.forEach(word => {
-      const option = document.createElement('span')
-      option.setAttribute('style', 'grid-area:1/1')
-      option.textContent = word
-      reserve.appendChild(option)
-    })
-
-    const live = document.createElement('span')
-    live.setAttribute('style', 'grid-area:1/1;white-space:nowrap')
     const cursor = document.createElement('span')
     cursor.setAttribute('style', 'display:inline-block;width:.55em;height:1em;background:' + color + ';vertical-align:middle;margin-left:2px;position:relative;top:-.05em;opacity:0')
     const text = document.createTextNode('')
-    live.append(text, cursor)
-    el.append(reserve, live)
+    el.append(text, cursor)
 
     function type() {
       const word = words[wordIndex]
@@ -278,6 +262,14 @@ function lockHeaderScrambleWidths() {
     item.style.width = `${Math.ceil(width)}px`;
     item.style.overflow = "hidden";
     item.style.whiteSpace = "nowrap";
+  });
+}
+
+function lockScrambleHeadingHeights() {
+  document.querySelectorAll<HTMLElement>("h2.heading-style-h3").forEach((heading) => {
+    if (!heading.querySelector(":scope > [data-scramble]")) return;
+    const height = heading.getBoundingClientRect().height;
+    if (height > 0) heading.style.minHeight = `${Math.ceil(height)}px`;
   });
 }
 
@@ -912,6 +904,7 @@ export function GatePageScripts() {
     const revealTransition = hasTransitionReveal();
     const removePixelHoverFallback = installPixelHoverFallback();
     const removePageTransitions = installPageTransitions();
+    lockScrambleHeadingHeights();
     const removeHeadingTrailingSlashSync = installHeadingTrailingSlashSync();
     const removeHowItWorksScroll = installHowItWorksScroll();
     const removeCapabilitiesAutoTabs = installCapabilitiesAutoTabs();

@@ -121,7 +121,7 @@
   z-index: 2;
   width: min(92%, 880px);
   margin: 0 auto;
-  padding-top: clamp(120px, 15vh, 165px);
+  padding-top: clamp(80px, 12vh, 145px);
   text-align: center;
   pointer-events: none;
 }

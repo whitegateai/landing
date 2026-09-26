@@ -6,7 +6,7 @@ import "../globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "WhiteGate | Özel Yazılım ve Yapay Zeka Sistemleri",
+  title: "WhiteGate | Şirketler için AI Dönüşümü",
   description: DEFAULT_DESCRIPTION,
   alternates: { canonical: "./" },
   applicationName: "WhiteGate",

@@ -543,7 +543,7 @@ function installPixelEmbers() {
   const grid = document.querySelector<HTMLElement>(".hero .pixel-grid");
   if (!grid) return () => undefined;
 
-  const colors = ["#003cff", "#0055ff", "#1670ff", "#4b91ff"];
+  const colors = ["#89cff0", "#a4dcf4", "#71bfe5", "#c7eafd"];
   const pixels = Array.from(grid.querySelectorAll<HTMLElement>(".pixel-box-color"));
   const gsap = (window as typeof window & { gsap?: Gsap }).gsap;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -787,6 +787,33 @@ function installContactForm() {
   };
 }
 
+function installIntegrationLogoExtras() {
+  const extras = [
+    { src: "/gate-assets/brand-logos/notion.svg", alt: "Notion logosu" },
+    { src: "/gate-assets/brand-logos/slack-logo.svg", alt: "Slack logosu" },
+    { src: "/gate-assets/brand-logos/hubspot.svg", alt: "HubSpot logosu" },
+    { src: "/gate-assets/brand-logos/google-drive-mark.png", alt: "Google Drive logosu" },
+    { src: "/gate-assets/brand-logos/gmail-mark.png", alt: "Gmail logosu" },
+    { src: "/gate-assets/brand-logos/airtable.svg", alt: "Airtable logosu" },
+  ];
+  const images = Array.from(document.querySelectorAll<HTMLImageElement>(".partner-logo-wrap._02 .partner-logo-image"));
+  if (images.length !== extras.length) return () => undefined;
+
+  const openAiLogo = document.querySelector<HTMLImageElement>(
+    ".partner-logo-wrap:not(._02) .partner-logo:nth-child(3) .partner-logo-image",
+  );
+  if (openAiLogo) openAiLogo.alt = "OpenAI logosu";
+
+  images.forEach((image, index) => {
+    const extra = extras[index];
+    image.src = extra.src;
+    image.alt = extra.alt;
+  });
+  document.documentElement.classList.add("integration-logo-ready");
+
+  return () => document.documentElement.classList.remove("integration-logo-ready");
+}
+
 function installPixelHoverFallback() {
   const leaveTimers = new Map<HTMLElement, number>();
 
@@ -881,7 +908,6 @@ export function GatePageScripts() {
         "/vaka-analizleri": "/careers",
         "/gizlilik-politikasi": "/privacy-policy",
         "/kullanim-sartlari": "/terms-of-service",
-        "/sistem-plani": "/waitlist",
       } as Record<string, string>)[path] ?? path;
     const config =
       gatePageData[runtimePath] ??
@@ -910,6 +936,7 @@ export function GatePageScripts() {
     const removeCapabilitiesAutoTabs = installCapabilitiesAutoTabs();
     const removeFaqAccordions = installFaqAccordions();
     const removeContactForm = installContactForm();
+    const removeIntegrationLogoExtras = installIntegrationLogoExtras();
     let removePixelEmbers: () => void = () => undefined;
     let removeTestimonialScroll: () => void = () => undefined;
     let revealTimer = 0;
@@ -996,6 +1023,7 @@ export function GatePageScripts() {
       removeCapabilitiesAutoTabs();
       removeFaqAccordions();
       removeContactForm();
+      removeIntegrationLogoExtras();
       removePixelEmbers();
       removeTestimonialScroll();
       badgeObserver.disconnect();

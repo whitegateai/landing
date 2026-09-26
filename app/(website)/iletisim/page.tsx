@@ -3,8 +3,8 @@ import { ContactPage } from "@/components/gate/generated/ContactPage";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Yapay Zeka ve Yazılım Projesi Görüşmesi | WhiteGate",
-  description: "Operasyon probleminizi, mevcut araçlarınızı ve doğru özel yazılım veya yapay zeka otomasyonu yolunu WhiteGate ile netleştirin.",
+  title: "Uygunluk Görüşmesi | WhiteGate",
+  description: "Operasyon probleminizi, mevcut araçlarınızı ve ilk AI uygulamasını birlikte değerlendirelim; doğru başlangıç yolunu netleştirelim.",
   path: "/iletisim",
 });
 

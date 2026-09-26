@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const SITE_URL = "https://www.whitegateai.com";
 export const SITE_NAME = "WhiteGate";
 export const DEFAULT_DESCRIPTION =
-  "WhiteGate; özel yazılım, yapay zeka otomasyonu, AI agent, entegrasyon ve operasyon panelleri geliştirir.";
+  "WhiteGate şirketlerin AI dönüşümünü planlar; size özel AI uygulamaları ve agentlar geliştirir, kullandığınız araçlara bağlar ve ekibinizle kullanıma alır.";
 
 export function createPageMetadata({
   title,

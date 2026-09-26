@@ -14,7 +14,7 @@ export const servicePages: ServicePage[] = [
     slug: "ozel-yazilim-gelistirme",
     title: "Özel Yazılım Geliştirme",
     seoTitle: "Özel Yazılım Geliştirme Şirketi | WhiteGate",
-    description: "İş akışınıza göre web, mobil, operasyon paneli ve kurum içi yazılım geliştirme hizmeti. Analizden canlı kullanıma tek sistem planı.",
+    description: "İş akışınıza göre web, mobil, operasyon paneli ve kurum içi yazılım geliştirme hizmeti. İhtiyaç netse doğrudan kapsam ve teklifle, belirsizse AI Dönüşüm Planı ile ilerler.",
     lead: "Hazır paketlerin işinize uymadığı noktada, operasyonunuza göre tasarlanan ve mevcut araçlarınıza bağlanan yazılımlar geliştiriyoruz.",
     image: "/gate-assets/whitegate-outputs/logistics.png",
     imageAlt: "WhiteGate özel yazılım ve operasyon paneli örneği",

@@ -1,0 +1,208 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap");
+@import url("https://db.onlinewebfonts.com/c/440b53b1a1c65037f944ff19259d8014?family=Nokia+Cellphone+FC+Small");
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  height: 100svh;
+  min-height: 680px;
+  background: #f3f4ed;
+  color: #17212e;
+  font-family: "Inter", Arial, sans-serif;
+}
+
+.scene {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  width: max(100%, 177.7778vh);
+  height: max(100%, 56.25vw);
+  transform: translate(-50%, -50%);
+  background: #f3f4ed url("/gate-assets/whitegate-calm-poster-tr.webp") center / cover no-repeat;
+  pointer-events: none;
+}
+
+.video { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0 0 auto;
+  height: min(74svh, 680px);
+  background:
+    radial-gradient(ellipse 55% 65% at 8% 25%, rgba(43, 138, 211, .16), transparent 85%),
+    radial-gradient(ellipse 55% 65% at 92% 25%, rgba(43, 138, 211, .16), transparent 85%),
+    linear-gradient(180deg, rgba(78, 160, 224, .38) 0%, rgba(103, 184, 234, .31) 44%, rgba(145, 207, 243, .13) 82%, transparent 100%);
+  pointer-events: none;
+}
+
+.hoverGrid {
+  position: absolute;
+  z-index: 0;
+  inset: 0 0 auto;
+  height: min(72svh, 680px);
+  display: grid;
+  grid-template-columns: repeat(30, minmax(0, 1fr));
+  grid-template-rows: repeat(11, minmax(0, 1fr));
+  mask-image:
+    linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%),
+    radial-gradient(ellipse 20% 70% at 50% 100%, transparent 0 60%, #000 93%),
+    radial-gradient(ellipse 28% 70% at 0% 100%, rgba(0, 0, 0, .22) 0 58%, #000 98%);
+  mask-composite: intersect;
+  pointer-events: auto;
+}
+.gridCell {
+  border-right: 1px solid rgba(255, 255, 255, .12);
+  border-bottom: 1px solid rgba(255, 255, 255, .12);
+  background: transparent;
+  transition: background-color 520ms cubic-bezier(.16, 1, .3, 1), box-shadow 520ms cubic-bezier(.16, 1, .3, 1);
+}
+.cloudCore {
+  background-color: rgba(255, 255, 255, .96);
+  box-shadow: 0 0 20px rgba(211, 239, 255, .65), inset 0 0 0 1px rgba(255, 255, 255, .9);
+}
+.cloudEdge {
+  background-color: rgba(255, 255, 255, .76);
+  box-shadow: 0 0 14px rgba(211, 239, 255, .48), inset 0 0 0 1px rgba(255, 255, 255, .65);
+}
+
+@media (max-width: 1600px) {
+  .hoverGrid { grid-template-columns: repeat(24, minmax(0, 1fr)); }
+  .gridCell:nth-child(n + 265) { display: none; }
+}
+
+@media (max-width: 1300px) {
+  .hoverGrid { grid-template-columns: repeat(20, minmax(0, 1fr)); }
+  .gridCell:nth-child(n + 221) { display: none; }
+}
+
+.phoneMessage {
+  position: absolute;
+  top: 64.4%;
+  left: 44.5%;
+  width: 11.5%;
+  color: #253715;
+  font-family: "Nokia Cellphone FC Small", "Courier New", monospace;
+  font-size: clamp(11px, 1.04vw, 18px);
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-align: left;
+}
+.readLabel {
+  position: absolute;
+  top: 73.5%;
+  left: 48.6%;
+  width: 5%;
+  transform: translateX(-50%);
+  color: #253715;
+  font-family: "Nokia Cellphone FC Small", "Courier New", monospace;
+  font-size: clamp(14px, 1.04vw, 18px);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+}
+.cursor {
+  display: inline-block;
+  width: .42em;
+  height: .86em;
+  margin-left: 2px;
+  background: #253715;
+  vertical-align: -.08em;
+  animation: cursorBlink .8s linear infinite;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  width: min(92%, 880px);
+  margin: 0 auto;
+  padding-top: clamp(120px, 15vh, 165px);
+  text-align: center;
+  pointer-events: none;
+}
+.content h1 {
+  margin: 0;
+  color: #17212e;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(49px, 5.7vw, 88px);
+  font-weight: 400;
+  letter-spacing: -.035em;
+  line-height: 1.12;
+  animation: titleEnter 1.5s cubic-bezier(.16,1,.3,1) both;
+}
+.content p {
+  max-width: 640px;
+  margin: 26px auto 0;
+  color: rgba(23,33,46,.76);
+  font-size: clamp(15px, 1.16vw, 18px);
+  font-weight: 400;
+  line-height: 1.55;
+  animation: bodyEnter 1.2s .3s cubic-bezier(.16,1,.3,1) both;
+}
+.caseCard {
+  position: absolute;
+  z-index: 3;
+  top: 45%;
+  right: clamp(32px, 6vw, 110px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 244px;
+  padding: 18px 19px 17px;
+  transform: rotate(3deg);
+  border: 1px solid rgba(23, 33, 46, .2);
+  border-radius: 5px;
+  background: rgba(255, 255, 250, .93);
+  box-shadow: 4px 6px 0 rgba(23, 33, 46, .12), 0 12px 36px rgba(23, 33, 46, .13);
+  color: #17212e;
+  text-decoration: none;
+  transition: transform 280ms cubic-bezier(.16, 1, .3, 1), box-shadow 280ms cubic-bezier(.16, 1, .3, 1);
+}
+.caseCard:hover, .caseCard:focus-visible {
+  transform: translateY(-5px) rotate(1deg);
+  box-shadow: 5px 9px 0 rgba(23, 33, 46, .13), 0 15px 42px rgba(23, 33, 46, .17);
+}
+.caseCard:focus-visible, .mobileCaseLink:focus-visible { outline: 2px solid #17212e; outline-offset: 5px; }
+.caseCard img { display: block; width: 128px; height: 91px; object-fit: contain; align-self: center; margin: 1px 0 4px; }
+.caseCard strong { font: 400 30px/.97 "Instrument Serif", Georgia, serif; letter-spacing: -.025em; }
+.caseHint { margin-top: 10px; font: 400 11px/1.4 "Inter", Arial, sans-serif; color: #4e5965; }
+.caseAction { display: flex; justify-content: space-between; width: 100%; margin-top: 16px; padding-top: 10px; border-top: 1px dashed rgba(23,33,46,.3); font: 600 11px/1.2 "Inter", Arial, sans-serif; }
+.mobileCaseLink { display: none; }
+@keyframes titleEnter { from { opacity: 0; transform: scale(.95); } to { opacity: 1; transform: scale(1); } }
+@keyframes bodyEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes cursorBlink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+
+@media (max-width: 700px) {
+  .hero { min-height: 700px; }
+  .scene {
+    top: calc(50% - 30px);
+    width: max(100%, calc(177.7778vh + 106.667px));
+    height: calc(100% + 60px);
+  }
+  .content { width: calc(100% - 32px); padding-top: 118px; }
+  .content h1 { font-size: clamp(44px, 12vw, 62px); }
+  .content p { max-width: 330px; margin-top: 21px; font-size: 14px; line-height: 1.5; }
+  .content .mobileCaseLink { display: inline-block; margin-top: 14px; color: #17212e; font: 600 12px/1.2 "Inter", Arial, sans-serif; text-decoration: underline; text-underline-offset: 3px; pointer-events: auto; }
+  .phoneMessage { font-size: 12px; }
+}
+
+@media (max-width: 1100px) {
+  .caseCard { display: none; }
+  .content .mobileCaseLink { display: inline-block; margin-top: 14px; color: #17212e; font: 600 12px/1.2 "Inter", Arial, sans-serif; text-decoration: underline; text-underline-offset: 3px; pointer-events: auto; }
+}
+
+@media (max-width: 991px), (hover: none) {
+  .hoverGrid { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video { display: none; }
+  .gridCell { transition: none; }
+  .content h1, .content p, .cursor { animation: none; }
+  .cursor { display: none; }
+}

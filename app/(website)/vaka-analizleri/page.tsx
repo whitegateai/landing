@@ -4,8 +4,8 @@ import { createPageMetadata } from "@/lib/seo";
 import { getCaseStudies } from "@/sanity/lib/editorial";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Yapay Zeka ve Otomasyon Vaka Analizleri | WhiteGate",
-  description: "Teklif, teslimat, operasyon paneli, entegrasyon ve AI agent problemlerinin çalışan sistemlere nasıl dönüştürüldüğünü inceleyin.",
+  title: "AI Uygulama Örnekleri | WhiteGate",
+  description: "İzinli müşteri vakası olmadığında, WhiteGate'in kurabileceği AI uygulaması, agent, entegrasyon ve operasyon sistemi türlerini gösteririz.",
   path: "/vaka-analizleri",
 });
 

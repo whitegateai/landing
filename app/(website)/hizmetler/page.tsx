@@ -3,8 +3,8 @@ import { DocsPage } from "@/components/gate/generated/DocsPage";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Yapay Zeka Otomasyonu ve Özel Yazılım Hizmetleri | WhiteGate",
-  description: "AI agent, iş akışı otomasyonu, özel web ve mobil yazılım, entegrasyon ve operasyon paneli hizmetlerini inceleyin.",
+  title: "AI Dönüşüm Planı ve AI Uygulamaları | WhiteGate",
+  description: "İlk AI uygulaması belirsizse AI Dönüşüm Planı; ihtiyaç netse doğrudan kapsam ve teklif ile ilerliyoruz.",
   path: "/hizmetler",
 });
 

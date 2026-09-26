@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "WhiteGate — Özel Yazılım ve Yapay Zeka Sistemleri";
+export const alt = "WhiteGate — AI Dönüşümü ve AI Uygulamaları";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -21,10 +21,10 @@ export default function Image() {
     >
       <div style={{ display: "flex", fontSize: 36, fontWeight: 700 }}>WhiteGate</div>
       <div style={{ display: "flex", maxWidth: 930, fontSize: 70, lineHeight: 1.04, letterSpacing: "-3px", fontWeight: 700 }}>
-        Özel yazılım ve yapay zeka sistemleri.
+        Şirketinizi AI çağına taşıyoruz.
       </div>
       <div style={{ display: "flex", justifyContent: "space-between", fontSize: 24 }}>
-        <span>problem → akış → sistem → canlı kullanım</span>
+        <span>planlıyoruz → geliştiriyoruz → kullanıma alıyoruz</span>
         <span>whitegateai.com</span>
       </div>
     </div>,

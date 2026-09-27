@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const permanentRedirects = [
   ["/about", "/hakkimizda"],
+  ["/services", "/hizmetler"],
   ["/docs", "/hizmetler"],
   ["/contact", "/iletisim"],
   ["/blog", "/yayinlar"],

@@ -24,8 +24,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/gate-assets/whitegate-logomark-black.svg",
-    shortcut: "/gate-assets/whitegate-logomark-black.svg",
+    icon: "/gate-assets/wg-black-logo-official.png",
+    shortcut: "/gate-assets/wg-black-logo-official.png",
+    apple: "/gate-assets/wg-black-logo-official.png",
   },
 };
 

@@ -44,7 +44,7 @@ export const organizationJsonLd = {
       "@id": `${SITE_URL}/#organization`,
       name: SITE_NAME,
       url: SITE_URL,
-      logo: `${SITE_URL}/gate-assets/whitegate-logomark-black.svg`,
+      logo: `${SITE_URL}/gate-assets/wg-black-logo-official.png`,
       email: "info@whitegateai.com",
       description: DEFAULT_DESCRIPTION,
       areaServed: { "@type": "Country", name: "Türkiye" },

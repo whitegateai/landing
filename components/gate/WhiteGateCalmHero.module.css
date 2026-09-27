@@ -170,6 +170,28 @@
   line-height: 1.55;
   animation: bodyEnter 1.2s .3s cubic-bezier(.16,1,.3,1) both;
 }
+.primaryCta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: fit-content;
+  min-height: 50px;
+  margin: 22px auto 0;
+  padding: 0 17px;
+  background: #111820;
+  color: #fff;
+  font: 600 13px/1.2 "Inter", Arial, sans-serif;
+  text-decoration: none;
+  pointer-events: auto;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+.primaryCta:hover { background: #274b61; transform: translateY(-2px); }
+.primaryCta:focus-visible { outline: 2px solid #111820; outline-offset: 4px; }
+.ctaMark { display: block; width: 7px; height: 7px; background: #fff; }
+@media (min-width: 1101px) {
+  .primaryCta { position: absolute; top: max(390px, 44vh); left: 0; margin: 0; }
+}
 .caseCard {
   position: absolute;
   z-index: 3;
@@ -251,14 +273,27 @@
   .brandKicker { margin-bottom: 15px; font-size: 10px; }
   .content h1 { font-size: clamp(44px, 12vw, 62px); }
   .content p { max-width: 330px; margin-top: 21px; font-size: 14px; line-height: 1.5; }
-  .content .mobileCaseLink { display: inline-block; margin-top: 14px; color: #17212e; font: 600 12px/1.2 "Inter", Arial, sans-serif; text-decoration: underline; text-underline-offset: 3px; pointer-events: auto; }
-  .phoneMessage { font-size: 12px; }
+  .primaryCta { min-height: 54px; margin-top: 19px; font-size: 14px; }
+  .content .mobileCaseLink { display: inline-block; margin-top: 12px; color: #435362; font: 500 11px/1.2 "Inter", Arial, sans-serif; text-decoration: underline; text-underline-offset: 3px; pointer-events: auto; }
+  .phoneMessage { left: 47%; width: auto; transform: translateX(-50%); font-size: 12px; }
   .scrollDoodle { display: none; }
+}
+
+@media (max-width: 700px) and (min-height: 780px) {
+  .scene { height: min(82svh, 700px); }
 }
 
 @media (max-width: 1100px) {
   .caseCard, .doodleArrow { display: none; }
+}
+
+@media (min-width: 701px) and (max-width: 1100px) {
   .content .mobileCaseLink { display: inline-block; margin-top: 14px; color: #17212e; font: 600 12px/1.2 "Inter", Arial, sans-serif; text-decoration: underline; text-underline-offset: 3px; pointer-events: auto; }
+}
+
+@media (min-width: 901px) and (max-width: 1100px) {
+  .primaryCta { position: absolute; top: max(390px, 44vh); left: -20px; margin: 0; }
+  .content .mobileCaseLink { position: absolute; top: calc(max(390px, 44vh) + 62px); left: -20px; margin: 0; }
 }
 
 @media (max-width: 991px), (hover: none) {
@@ -268,6 +303,7 @@
 @media (prefers-reduced-motion: reduce) {
   .video { display: none; }
   .gridCell { transition: none; }
+  .primaryCta { transition: none; }
   .content h1, .content p, .cursor { animation: none; }
   .cursor { display: none; }
 }

@@ -135,6 +135,7 @@ export function WhiteGateCalmHero({ content }: { content: NokiaContent }) {
         <div className={styles.brandKicker}>WHITEGATE AI <span>AI DÖNÜŞÜMÜ</span></div>
         <h1 id="whitegate-calm-title">Şirketinizi AI çağına<br />taşıyoruz.</h1>
         <p>Ekibinizin her gün yaptığı işlerde AI'ın nerede yardımcı olacağını belirliyoruz. Size özel uygulamalar ve agentlar geliştirip ekibinizle kullanıma alıyoruz.</p>
+        <Link className={styles.primaryCta} href="/iletisim"><span aria-hidden="true" className={styles.ctaMark} />İlk uygulamayı konuşalım <span aria-hidden="true">↗</span></Link>
         <Link className={styles.mobileCaseLink} href="/yayinlar/nokia-3310-ile-sirket-yonetmek">{content.nokiaMobileLink}</Link>
       </div>
       <Link className={styles.caseCard} href="/yayinlar/nokia-3310-ile-sirket-yonetmek" aria-label={`${content.nokiaCardTitle}: yazıyı oku`}>

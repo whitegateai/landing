@@ -6,8 +6,10 @@ export const metadata: Metadata = { metadataBase: new URL(SITE_URL) };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="tr">
-      <body>{children}</body>
+    <html lang="tr" className="gate-arrival-pending" suppressHydrationWarning>
+      <body>
+        {children}
+      </body>
     </html>
   );
 }

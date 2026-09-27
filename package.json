@@ -2,7 +2,7 @@
   "name": "gate-marketing",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS=--max-old-space-size=12288 next dev --hostname 127.0.0.1",
+    "dev": "node --max-old-space-size=12288 ./node_modules/next/dist/bin/next dev --hostname 127.0.0.1",
     "build": "next build",
     "start": "next start --hostname 127.0.0.1",
     "test:contact": "node --experimental-strip-types sanity/lib/contactSubmission.test.ts"
@@ -21,6 +21,6 @@
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "typescript": "latest"
+    "typescript": "7.0.2"
   }
 }

@@ -6,10 +6,10 @@ import "../globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "WhiteGate | Şirketler için AI Dönüşümü",
+  title: "WhiteGate AI | Şirketler için AI Dönüşümü",
   description: DEFAULT_DESCRIPTION,
   alternates: { canonical: "./" },
-  applicationName: "WhiteGate",
+  applicationName: "WhiteGate AI",
   category: "technology",
   referrer: "origin-when-cross-origin",
   robots: {
@@ -37,6 +37,9 @@ export default function WebsiteLayout({ children }: Readonly<{ children: ReactNo
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c") }}
       />
       <link rel="stylesheet" href="/gate-css/shared.css" />
+      <div className="gate-arrival-cover" aria-hidden="true">
+        <img src="/gate-assets/whitegate-slit-white.png" alt="" width="42" height="120" />
+      </div>
       <GatePageScripts />
       {children}
     </>

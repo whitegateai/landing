@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const SITE_URL = "https://www.whitegateai.com";
-export const SITE_NAME = "WhiteGate";
+export const SITE_NAME = "WhiteGate AI";
 export const DEFAULT_DESCRIPTION =
   "WhiteGate şirketlerin AI dönüşümünü planlar; size özel AI uygulamaları ve agentlar geliştirir, kullandığınız araçlara bağlar ve ekibinizle kullanıma alır.";
 
@@ -25,7 +25,7 @@ export function createPageMetadata({
       siteName: SITE_NAME,
       locale: "tr_TR",
       type: "website",
-      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "WhiteGate" }],
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "WhiteGate AI" }],
     },
     twitter: {
       card: "summary_large_image",

@@ -1,0 +1,64 @@
+.root :global(.mission-marquee.mission-process) {
+  width: min(100% - 3rem, 72rem);
+  margin-inline: auto;
+  padding: 0 0 clamp(4rem, 7vw, 7rem);
+}
+
+.root :global(.mission-process-grid) {
+  gap: .75rem;
+  border: 0;
+  background: transparent;
+}
+
+.root :global(.mission-process-item) {
+  position: relative;
+  min-height: 16rem;
+  padding: 1.5rem;
+  border: 1px solid #d9e2e6;
+  background: #fbfcfc;
+  box-shadow: 0 14px 36px rgb(20 55 71 / 5%);
+}
+
+.root :global(.mission-process-item:last-child) {
+  border: 1px solid #d9e2e6;
+}
+
+.root :global(.mission-process-item)::before {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 3.5rem;
+  height: 3px;
+  background: #69b7d8;
+  content: "";
+}
+
+.root :global(.mission-process-item span) {
+  letter-spacing: .06em;
+}
+
+.root :global(.mission-process-item strong) {
+  max-width: 17ch;
+  font-size: clamp(1.15rem, 1.5vw, 1.45rem);
+}
+
+.root :global(.mission-process-item p) {
+  max-width: 29ch;
+  color: #3b4a52;
+}
+
+.root :global(.team-card-img[src$="veysel-basdemir-v2.png"]) {
+  filter: grayscale(1);
+  object-position: center 30%;
+}
+
+@media (max-width: 991px) {
+  .root :global(.mission-process-grid) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+  .root :global(.mission-marquee.mission-process) { width: min(100% - 2rem, 72rem); }
+  .root :global(.mission-process-grid) { grid-template-columns: 1fr; }
+  .root :global(.mission-process-item) { min-height: 0; padding: 1.25rem; }
+  .root :global(.mission-process-item p) { margin-top: .5rem; max-width: none; }
+}

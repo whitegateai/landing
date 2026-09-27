@@ -6,55 +6,71 @@ import {
 } from "@/components/gate/generated/DocsPostsIntroductionPage";
 import type { ServicePage } from "@/lib/services";
 import { servicePages } from "@/lib/services";
+import styles from "./ServiceLandingPage.module.css";
 
 export function ServiceLandingPage({ service }: { service: ServicePage }) {
-  const related = servicePages.filter((item) => item.slug !== service.slug).slice(0, 4);
+  const related = servicePages.filter((item) => item.slug !== service.slug && item.slug !== "n8n-otomasyon");
+  const number = String(servicePages.indexOf(service) + 1).padStart(2, "0");
 
   return (
     <div className="page-wrapper">
       <DocsPostsIntroductionGlobalStyles />
       <DocsPostsIntroductionNav />
       <main className="main-wrapper">
-        <article>
-          <section className="section cms-detail-hero">
+        <article className={styles.page}>
+          <header className={styles.hero}>
             <div className="padding-global"><div className="container-base">
-              <nav aria-label="Sayfa yolu" className="cms-detail-back">
-                <a href="/hizmetler">HİZMETLER</a> <span aria-hidden="true">/</span> <span>{service.title}</span>
+              <nav aria-label="Sayfa yolu" className={styles.breadcrumb}>
+                <a href="/hizmetler">HİZMETLER</a><span aria-hidden="true"> / </span><span>{service.title}</span>
               </nav>
-              <div className="cms-detail-meta">
-                <div className="cms-detail-tags"><span>[HİZMET]</span><span>[TÜRKİYE]</span></div>
+              <div className={styles.heroGrid}>
+                <div className={styles.heroCopy}>
+                  <div className={styles.eyebrow}>[ WHITEGATE AI / ÇÖZÜM {number} ]</div>
+                  <h1>{service.title}</h1>
+                  <p>{service.lead}</p>
+                  <a className={styles.heroLink} href="/iletisim">ŞİRKETİNİZDEKİ İŞİ KONUŞALIM <span aria-hidden="true">↗</span></a>
+                </div>
+                <figure className={styles.heroVisual}>
+                  <img src={service.image} alt={service.imageAlt} width={1536} height={1024} fetchPriority="high" />
+                  <figcaption>Uygulama türü / {number}</figcaption>
+                </figure>
               </div>
-              <h1>{service.title}</h1>
-              <p className="cms-detail-lead">{service.lead}</p>
-              <img
-                className="cms-detail-cover"
-                src={service.image}
-                alt={service.imageAlt}
-                width={724}
-                height={543}
-                loading="eager"
-                fetchPriority="high"
-              />
             </div></div>
-          </section>
-          <section className="section cms-detail-content">
-            <div className="padding-global"><div className="container-small docs_richtext w-richtext">
-              {service.sections.map((section) => (
-                <section key={section.heading}>
-                  <h2>{section.heading}</h2>
-                  {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-                  {section.bullets ? <ul>{section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul> : null}
+          </header>
+
+          <div className={styles.pathway}>
+            <div className="padding-global"><div className="container-base">
+              <span>PLANLIYORUZ</span><b aria-hidden="true">→</b><span>GELİŞTİRİYORUZ</span><b aria-hidden="true">→</b><span>KULLANIMA ALIYORUZ</span>
+            </div></div>
+          </div>
+
+          <section className={styles.body} aria-label="Çözümün ayrıntıları">
+            <div className="padding-global"><div className="container-base">
+              {service.sections.map((section, index) => (
+                <section className={styles.chapter} key={section.heading}>
+                  <div className={styles.chapterHeading}>
+                    <span>// {String(index + 1).padStart(2, "0")}</span>
+                    <h2>{section.heading}</h2>
+                  </div>
+                  <div className={styles.chapterText}>
+                    {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                    {section.bullets && <ul>{section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>}
+                  </div>
                 </section>
               ))}
-              <section>
-                <h2>İlgili WhiteGate hizmetleri</h2>
-                <ul>
-                  {related.map((item) => (
-                    <li key={item.slug}><a href={`/hizmetler/${item.slug}`}>{item.title}</a></li>
-                  ))}
-                </ul>
-                <p><a href="/iletisim">Projenizi ve mevcut iş akışınızı konuşalım.</a></p>
-              </section>
+            </div></div>
+          </section>
+
+          <section className={styles.related} aria-labelledby="related-services-heading">
+            <div className="padding-global"><div className="container-base">
+              <div className={styles.relatedHeading}><span>[ SONRAKİ ADIM ]</span><h2 id="related-services-heading">Başka neler kurabiliriz?</h2></div>
+              <div className={styles.relatedGrid}>
+                {related.map((item) => (
+                  <a href={`/hizmetler/${item.slug}`} key={item.slug}>
+                    <span>{item.title}</span><span aria-hidden="true">↗</span>
+                  </a>
+                ))}
+              </div>
             </div></div>
           </section>
         </article>

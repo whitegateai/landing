@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { JobPostsProductDesignerAiSystemsPage } from "@/components/gate/generated/JobPostsProductDesignerAiSystemsPage";
+import { ExampleScenario } from "@/components/gate/ExampleScenariosPage";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Operasyon Paneli | WhiteGate",
-  description: "Gecikme, sorumlu, durum ve karar noktalarını görünür yapan dashboard yaklaşımı.",
-};
+export const metadata: Metadata = createPageMetadata({
+  title: "İş Durumu Paneli Örneği | WhiteGate AI",
+  description: "Görev kayıtlarını, sorumluları ve bekleyen kararları tek yerde görmeye yönelik AI destekli operasyon paneli senaryosu.",
+  path: "/vaka-analizleri/operasyon-paneli",
+});
 
 export default function Page() {
-  return <JobPostsProductDesignerAiSystemsPage />;
+  return <ExampleScenario slug="operasyon-paneli" />;
 }

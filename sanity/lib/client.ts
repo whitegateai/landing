@@ -7,4 +7,6 @@ export const client = createClient({
   apiVersion,
   perspective: "published",
   useCdn: true,
+  timeout: 4000,
+  maxRetries: 1,
 });

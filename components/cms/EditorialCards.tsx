@@ -51,7 +51,7 @@ export function CmsCaseCards({ cases }: { cases: EditorialListItem[] }) {
   return (
     <section className="section cms-editorial-section">
       <div className="padding-global"><div className="container-base">
-        <div className="cms-editorial-heading"><span>//</span> YAYINLANAN VAKALAR</div>
+        <div className="cms-editorial-heading"><span>//</span> YAYINLANAN ÇALIŞMALAR</div>
         <div className="job-collection-list w-dyn-items">
           {cases.map((item, index) => (
             <div key={item._id} className="job-collection-item w-dyn-item">

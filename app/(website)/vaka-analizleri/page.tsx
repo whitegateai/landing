@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { CareersPage } from "@/components/gate/generated/CareersPage";
+import { ExampleScenariosIndex } from "@/components/gate/ExampleScenariosPage";
 import { createPageMetadata } from "@/lib/seo";
 import { getCaseStudies } from "@/sanity/lib/editorial";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "AI Uygulama Örnekleri | WhiteGate",
-  description: "İzinli müşteri vakası olmadığında, WhiteGate'in kurabileceği AI uygulaması, agent, entegrasyon ve operasyon sistemi türlerini gösteririz.",
+  title: "AI Uygulama Senaryoları | WhiteGate AI",
+  description: "Bir AI uygulaması şirketinizde hangi işi üstlenebilir? Ürün bilgisi asistanı, teklif takibi, operasyon paneli ve araç bağlantısı için örnek senaryolar.",
   path: "/vaka-analizleri",
 });
 
 export default async function Page() {
-  return <CareersPage cases={await getCaseStudies()} />;
+  return <ExampleScenariosIndex cases={await getCaseStudies()} />;
 }

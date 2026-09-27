@@ -10,25 +10,29 @@ window.addEventListener('load', function () {
   gsap.utils.toArray('[data-typewriter]').forEach(el => {
     const words = (el.dataset.words || '').split(',').map(word => word.trim()).filter(Boolean)
     if (!words.length) return
+    if (el.dataset.typewriterStarted) return
+    el.dataset.typewriterStarted = '1'
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       el.textContent = words[0]
       return
     }
+    if (words.length === 1) return
 
     const TYPE_SPEED = 50
     const DELETE_SPEED = 35
     const HOLD_AT_END = 800
     let wordIndex = 0
-    let charIndex = 0
+    let charIndex = words[0].length
 
     const color = getComputedStyle(el).color
     el.textContent = ''
     const cursor = document.createElement('span')
     cursor.setAttribute('style', 'display:inline-block;width:.55em;height:1em;background:' + color + ';vertical-align:middle;margin-left:2px;position:relative;top:-.05em;opacity:0')
-    const text = document.createTextNode('')
+    const text = document.createTextNode(words[0])
     el.append(text, cursor)
 
     function type() {
+      if (!el.isConnected) return
       const word = words[wordIndex]
       charIndex += 1
       text.textContent = word.slice(0, charIndex - 1)
@@ -43,6 +47,7 @@ window.addEventListener('load', function () {
     }
 
     function erase() {
+      if (!el.isConnected) return
       const word = words[wordIndex]
       charIndex -= 1
       text.textContent = word.slice(0, charIndex)
@@ -53,7 +58,7 @@ window.addEventListener('load', function () {
       setTimeout(type, 200)
     }
 
-    setTimeout(type, parseInt(el.dataset.delay) || 0)
+    setTimeout(erase, (parseInt(el.dataset.delay) || 0) + HOLD_AT_END)
   })
 })
 `;
@@ -72,59 +77,26 @@ function delay(ms: number) {
   return new Promise<void>((resolve) => window.setTimeout(resolve, ms));
 }
 
-function animateSquares(items: HTMLElement[], from: number, to: number) {
-  const duration = 140;
-  const stagger = 0.8;
-  if (!("animate" in document.body)) {
-    items.forEach((item) => {
-      item.style.opacity = String(to);
-    });
-    return delay(duration + items.length * stagger);
-  }
-
-  return Promise.all(
-    items.map(
-      (item, index) =>
-        new Promise<void>((resolve) => {
-          const animation = item.animate([{ opacity: from }, { opacity: to }], {
-            delay: index * stagger,
-            duration,
-            easing: "cubic-bezier(.22,1,.36,1)",
-            fill: "forwards",
-          });
-          animation.finished
-            .catch(() => undefined)
-            .finally(() => {
-              item.style.opacity = String(to);
-              resolve();
-            });
-        }),
-    ),
-  ).then(() => undefined);
-}
-
-function shuffled<T>(items: T[]) {
-  return [...items].sort(() => Math.random() - 0.5);
-}
-
 function clamp01(value: number) {
   return Math.min(1, Math.max(0, value));
 }
 
-function createFallbackPreload() {
-  const preload = document.createElement("div");
-  preload.className = "preload";
-  for (let rowIndex = 0; rowIndex < 11; rowIndex += 1) {
-    const row = document.createElement("div");
-    row.className = "preload-row";
-    for (let columnIndex = 0; columnIndex < 10; columnIndex += 1) {
-      const square = document.createElement("div");
-      square.className = "preload-square";
-      row.appendChild(square);
-    }
-    preload.appendChild(row);
-  }
-  return preload;
+function ensurePreloadBrand(preload: HTMLElement) {
+  if (preload.querySelector(".gate-preload-brand")) return;
+  const brand = document.createElement("div");
+  brand.className = "gate-preload-brand";
+  brand.setAttribute("aria-hidden", "true");
+  const mark = document.createElement("img");
+  mark.src = "/gate-assets/whitegate-slit-white.png";
+  mark.alt = "";
+  mark.width = 42;
+  mark.height = 120;
+  brand.appendChild(mark);
+  preload.appendChild(brand);
+}
+
+function showPreloadBrand(preload: HTMLElement, visible: boolean) {
+  preload.querySelector(".gate-preload-brand")?.classList.toggle("is-visible", visible);
 }
 
 function markTransitionReveal() {
@@ -153,105 +125,25 @@ function clearTransitionReveal() {
 
 function getTransitionPreload() {
   let preload = document.getElementById("gate-transition-preload") as HTMLElement | null;
-  if (preload) return preload;
+  if (preload) {
+    ensurePreloadBrand(preload);
+    return preload;
+  }
 
-  const source = document.querySelector<HTMLElement>(".preload");
-  preload = (source?.cloneNode(true) as HTMLElement | undefined) ?? createFallbackPreload();
+  preload = document.createElement("div");
+  ensurePreloadBrand(preload);
   preload.id = "gate-transition-preload";
   preload.setAttribute("aria-hidden", "true");
-  preload.style.display = "none";
-  preload.style.inset = "0";
-  preload.style.position = "fixed";
-  preload.style.width = "100vw";
-  preload.style.height = "100vh";
-  preload.style.overflow = "hidden";
-  preload.style.zIndex = "2147483000";
-  preload.style.pointerEvents = "none";
   document.body.appendChild(preload);
   return preload;
 }
 
-function hidePagePreloadSquares() {
-  document.querySelectorAll<HTMLElement>(".preload .preload-square").forEach((item) => {
-    if (item.closest("#gate-transition-preload")) return;
-    item.style.opacity = "0";
-    item.style.transform = "translate3d(0px, 0px, 0px)";
-  });
-}
-
-function holdPreloadCovered() {
-  const preload = getTransitionPreload();
-  const squares = Array.from(preload.querySelectorAll<HTMLElement>(".preload-square"));
-  if (squares.length === 0) return null;
-
-  document.documentElement.classList.add("gate-is-transitioning");
-  preload.getAnimations({ subtree: true }).forEach((animation) => animation.cancel());
-  preload.style.display = "flex";
-
-  squares.forEach((item) => {
-    item.style.opacity = "1";
-    item.style.transform = "translate3d(0px, 0px, 0px)";
-  });
-
-  return { preload, squares };
-}
-
 async function playPreloadCover() {
   const preload = getTransitionPreload();
-  const squares = Array.from(preload.querySelectorAll<HTMLElement>(".preload-square"));
-  if (squares.length === 0) return;
-
   document.documentElement.classList.add("gate-is-transitioning");
-
-  preload.getAnimations({ subtree: true }).forEach((animation) => animation.cancel());
-  preload.style.display = "flex";
-
-  squares.forEach((item) => {
-    item.style.opacity = "0";
-    item.style.transform = "translate3d(0px, 0px, 0px)";
-  });
-
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    squares.forEach((item) => {
-      item.style.opacity = "1";
-    });
-    return;
-  }
-
-  await animateSquares(shuffled(squares), 0, 1);
-}
-
-async function playPreloadReveal() {
-  const held = holdPreloadCovered();
-  if (!held) return;
-
-  hidePagePreloadSquares();
-  await delay(40);
-
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    held.squares.forEach((item) => {
-      item.style.opacity = "0";
-    });
-  } else {
-    await animateSquares(shuffled(held.squares), 1, 0);
-  }
-
-  held.preload.style.display = "none";
-  document.documentElement.classList.remove("gate-is-transitioning");
-  hidePagePreloadSquares();
-}
-
-function forcePreloadRevealComplete() {
-  const preload = document.getElementById("gate-transition-preload") as HTMLElement | null;
-  if (preload) {
-    preload.getAnimations({ subtree: true }).forEach((animation) => animation.cancel());
-    preload.querySelectorAll<HTMLElement>(".preload-square").forEach((item) => {
-      item.style.opacity = "0";
-    });
-    preload.style.display = "none";
-  }
-  document.documentElement.classList.remove("gate-is-transitioning");
-  hidePagePreloadSquares();
+  preload.classList.add("is-visible");
+  showPreloadBrand(preload, true);
+  await delay(window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 360);
 }
 
 function lockHeaderScrambleWidths() {
@@ -340,18 +232,8 @@ function installHowItWorksScroll() {
   if (rays.length === 0) return () => undefined;
 
   let frame = 0;
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  const fullText = (item: HTMLElement) => {
-    if (!item.dataset.hiwText) {
-      item.dataset.hiwText = item.textContent ?? "";
-      const height = item.getBoundingClientRect().height;
-      if (height > 0) item.style.minHeight = `${Math.ceil(height)}px`;
-    }
-    return item.dataset.hiwText;
-  };
-
-  const setCard = (card: HTMLElement, index: number, active: boolean, lineProgress: number, textProgress: number) => {
+  const setCard = (card: HTMLElement, index: number, active: boolean, lineProgress: number) => {
     card.querySelector(".hiw-card-inner")?.classList.toggle("active", active);
     card.querySelectorAll<HTMLElement>(".hiw-card-number").forEach((number) => {
       number.classList.toggle("active", active && number.textContent?.includes(String(index + 1).padStart(3, "0")));
@@ -364,11 +246,8 @@ function installHowItWorksScroll() {
     if (line) line.style.width = `${Math.round(clamp01(lineProgress) * 100)}%`;
 
     const desc = card.querySelector<HTMLElement>(".hiw-card-desc");
-    if (!desc) return;
-    const text = fullText(desc);
-    const typed = reducedMotion.matches ? 1 : clamp01((textProgress - 0.08) / 0.68);
-    desc.textContent = active ? text.slice(0, Math.max(1, Math.ceil(text.length * typed))) : text;
-    desc.classList.toggle("active", active);
+    if (desc?.dataset.hiwText) desc.textContent = desc.dataset.hiwText;
+    desc?.classList.toggle("active", active);
   };
 
   const sync = () => {
@@ -391,7 +270,7 @@ function installHowItWorksScroll() {
       const segmentProgress = progress >= 1 ? 1 : scaled - activeIndex;
 
       cards.forEach((card, index) => {
-        setCard(card, index, index === activeIndex, index < activeIndex ? 1 : index === activeIndex ? segmentProgress : 0, segmentProgress);
+        setCard(card, index, index === activeIndex, index < activeIndex ? 1 : index === activeIndex ? segmentProgress : 0);
       });
 
       slides.forEach((slide, index) => {
@@ -400,7 +279,7 @@ function installHowItWorksScroll() {
         slide.style.pointerEvents = active ? "auto" : "none";
         slide.style.zIndex = String(active ? count + 1 : count - index);
         const card = slide.querySelector<HTMLElement>(".hiw-card");
-        if (card) setCard(card, index, active, active ? segmentProgress : index < activeIndex ? 1 : 0, segmentProgress);
+        if (card) setCard(card, index, active, active ? segmentProgress : index < activeIndex ? 1 : 0);
       });
     });
   };
@@ -415,14 +294,12 @@ function installHowItWorksScroll() {
 
   window.addEventListener("scroll", schedule, { passive: true });
   window.addEventListener("resize", schedule);
-  reducedMotion.addEventListener("change", schedule);
   schedule();
 
   return () => {
     if (frame) window.cancelAnimationFrame(frame);
     window.removeEventListener("scroll", schedule);
     window.removeEventListener("resize", schedule);
-    reducedMotion.removeEventListener("change", schedule);
   };
 }
 
@@ -437,6 +314,7 @@ function installCapabilitiesAutoTabs() {
       const menu = root.querySelector<HTMLElement>(".capabilities-tabs-menu");
       const media = root.querySelector<HTMLElement>(".capabilities-grid-right.w-tab-content");
       const mobile = window.matchMedia("(max-width: 767px)");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
       let timer = 0;
       let heightFrame = 0;
       let index = Math.max(
@@ -471,10 +349,11 @@ function installCapabilitiesAutoTabs() {
         });
         panes.forEach((pane, paneIndex) => {
           pane.classList.toggle("w--tab-active", pane.getAttribute("data-w-tab") === activeName || paneIndex === index);
+          if (paneIndex !== index || reducedMotion.matches) pane.querySelector("video")?.pause();
         });
 
         const video = panes[index]?.querySelector("video");
-        if (video) {
+        if (video && !reducedMotion.matches) {
           try {
             video.currentTime = 0;
           } catch {
@@ -495,7 +374,7 @@ function installCapabilitiesAutoTabs() {
 
       const schedule = () => {
         window.clearTimeout(timer);
-        if (mobile.matches) return;
+        if (mobile.matches || reducedMotion.matches) return;
         timer = window.setTimeout(() => {
           index = (index + 1) % links.length;
           sync();
@@ -512,10 +391,15 @@ function installCapabilitiesAutoTabs() {
         sync();
         schedule();
       };
+      const onMotionChange = () => {
+        sync();
+        schedule();
+      };
 
       root.addEventListener("click", onClick);
       window.addEventListener("resize", scheduleHeightSync);
       mobile.addEventListener("change", schedule);
+      reducedMotion.addEventListener("change", onMotionChange);
       sync();
       schedule();
 
@@ -525,6 +409,7 @@ function installCapabilitiesAutoTabs() {
         root.removeEventListener("click", onClick);
         window.removeEventListener("resize", scheduleHeightSync);
         mobile.removeEventListener("change", schedule);
+        reducedMotion.removeEventListener("change", onMotionChange);
       };
     })
     .filter((cleanup): cleanup is () => void => Boolean(cleanup));
@@ -599,45 +484,88 @@ function installPixelEmbers() {
 function installTestimonialScroll() {
   const section = document.querySelector<HTMLElement>(".testimonial");
   const mask = section?.querySelector<HTMLElement>(".testimonial-slider-mask");
-  const slides = mask ? Array.from(mask.querySelectorAll<HTMLElement>(":scope > .testimonial-slide")) : [];
-  const gsap = (window as typeof window & { gsap?: Gsap }).gsap;
-  if (!section || !mask || slides.length < 2 || !gsap || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    return () => undefined;
-  }
-
+  const previous = section?.querySelector<HTMLButtonElement>(".testimonial-slider-btn.left");
+  const next = section?.querySelector<HTMLButtonElement>(".testimonial-slider-btn.right");
+  const slide = mask?.querySelector<HTMLElement>(".testimonial-slide");
+  if (!mask || !slide || !previous || !next) return () => undefined;
   let frame = 0;
-  const sync = () => {
+  let manualOffset = 0;
+  let basePosition = 0;
+  let currentPosition = 0;
+  let startPosition = 0;
+  let travelLimit = 0;
+  const animatedDesktop = () => window.innerWidth >= 768 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const syncWithPage = () => {
     frame = 0;
-    const rect = section.getBoundingClientRect();
-    const progress = clamp01((window.innerHeight * 0.88 - rect.top) / (rect.height + window.innerHeight * 0.68));
-    const slideWidth = slides[0]?.getBoundingClientRect().width ?? 0;
-    const maxTravel = Math.max(0, slideWidth * slides.length - mask.getBoundingClientRect().width);
-    const travel = Math.min(maxTravel, window.innerWidth * (window.innerWidth < 768 ? 1.8 : 2.2));
-    const start = window.innerWidth * 0.12;
-
-    gsap.to(mask, {
-      "--testimonial-scroll-x": `${start - (start + travel) * progress}px`,
-      duration: 0.48,
-      ease: "power2.out",
-      overwrite: true,
-    });
+    if (!animatedDesktop()) {
+      mask.style.removeProperty("--testimonial-scroll-x");
+      update();
+      return;
+    }
+    const rect = section?.getBoundingClientRect();
+    if (!rect) return;
+    const progress = clamp01((window.innerHeight * .88 - rect.top) / (rect.height + window.innerHeight * .68));
+    const slideWidth = slide.getBoundingClientRect().width;
+    const travel = Math.max(0, slideWidth * mask.querySelectorAll(":scope > .testimonial-slide").length - mask.clientWidth);
+    const start = window.innerWidth * .12;
+    basePosition = start - (start + travel) * progress;
+    startPosition = start;
+    travelLimit = travel;
+    const position = Math.max(-travel, Math.min(start, basePosition - manualOffset));
+    currentPosition = position;
+    const x = `${position}px`;
+    const gsap = (window as typeof window & { gsap?: Gsap }).gsap;
+    if (gsap) gsap.to(mask, { "--testimonial-scroll-x": x, duration: .48, ease: "power2.out", overwrite: true });
+    else mask.style.setProperty("--testimonial-scroll-x", x);
+    previous.disabled = position >= start - 2;
+    next.disabled = position <= -travel + 2;
   };
-  const schedule = () => {
-    if (frame) return;
-    frame = window.requestAnimationFrame(sync);
+  const schedule = () => { if (!frame) frame = window.requestAnimationFrame(syncWithPage); };
+
+  const update = () => {
+    if (animatedDesktop()) return;
+    previous.disabled = mask.scrollLeft <= 2;
+    next.disabled = mask.scrollLeft + mask.clientWidth >= mask.scrollWidth - 2;
+  };
+  const move = (direction: number) => {
+    const step = slide.getBoundingClientRect().width;
+    if (animatedDesktop()) {
+      const target = Math.max(-travelLimit, Math.min(startPosition, currentPosition - direction * step));
+      manualOffset = basePosition - target;
+      schedule();
+      return;
+    }
+    mask.scrollBy({ left: direction * step, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  };
+  const onPrevious = () => move(-1);
+  const onNext = () => move(1);
+  const onKeyDown = (event: KeyboardEvent) => {
+    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+    event.preventDefault();
+    move(event.key === "ArrowRight" ? 1 : -1);
   };
 
-  mask.classList.add("testimonial-scroll-active");
-  window.addEventListener("scroll", schedule, { passive: true });
+  previous.addEventListener("click", onPrevious);
+  next.addEventListener("click", onNext);
+  mask.addEventListener("scroll", update, { passive: true });
+  mask.addEventListener("keydown", onKeyDown);
+  window.addEventListener("resize", update);
   window.addEventListener("resize", schedule);
+  window.addEventListener("scroll", schedule, { passive: true });
+  update();
   schedule();
 
   return () => {
-    if (frame) window.cancelAnimationFrame(frame);
-    window.removeEventListener("scroll", schedule);
+    previous.removeEventListener("click", onPrevious);
+    next.removeEventListener("click", onNext);
+    mask.removeEventListener("scroll", update);
+    mask.removeEventListener("keydown", onKeyDown);
+    window.removeEventListener("resize", update);
     window.removeEventListener("resize", schedule);
-    gsap.killTweensOf(mask);
-    mask.classList.remove("testimonial-scroll-active");
+    window.removeEventListener("scroll", schedule);
+    if (frame) window.cancelAnimationFrame(frame);
+    (window as typeof window & { gsap?: Gsap }).gsap?.killTweensOf(mask);
     mask.style.removeProperty("--testimonial-scroll-x");
   };
 }
@@ -694,6 +622,7 @@ function installFaqAccordions() {
       const link = event.target instanceof Element ? event.target.closest<HTMLElement>(".faq-tab-link") : null;
       if (!link || !root.contains(link)) return;
       event.preventDefault();
+      event.stopPropagation();
       const index = links.indexOf(link);
       if (index >= 0) setActive(index, true);
     };
@@ -785,33 +714,6 @@ function installContactForm() {
     form.removeEventListener("submit", onSubmit, true);
     honeypot.remove();
   };
-}
-
-function installIntegrationLogoExtras() {
-  const extras = [
-    { src: "/gate-assets/brand-logos/notion.svg", alt: "Notion logosu" },
-    { src: "/gate-assets/brand-logos/slack-logo.svg", alt: "Slack logosu" },
-    { src: "/gate-assets/brand-logos/hubspot.svg", alt: "HubSpot logosu" },
-    { src: "/gate-assets/brand-logos/google-drive-mark.png", alt: "Google Drive logosu" },
-    { src: "/gate-assets/brand-logos/gmail-mark.png", alt: "Gmail logosu" },
-    { src: "/gate-assets/brand-logos/airtable.svg", alt: "Airtable logosu" },
-  ];
-  const images = Array.from(document.querySelectorAll<HTMLImageElement>(".partner-logo-wrap._02 .partner-logo-image"));
-  if (images.length !== extras.length) return () => undefined;
-
-  const openAiLogo = document.querySelector<HTMLImageElement>(
-    ".partner-logo-wrap:not(._02) .partner-logo:nth-child(3) .partner-logo-image",
-  );
-  if (openAiLogo) openAiLogo.alt = "OpenAI logosu";
-
-  images.forEach((image, index) => {
-    const extra = extras[index];
-    image.src = extra.src;
-    image.alt = extra.alt;
-  });
-  document.documentElement.classList.add("integration-logo-ready");
-
-  return () => document.documentElement.classList.remove("integration-logo-ready");
 }
 
 function installPixelHoverFallback() {
@@ -936,26 +838,19 @@ export function GatePageScripts() {
     const removeCapabilitiesAutoTabs = installCapabilitiesAutoTabs();
     const removeFaqAccordions = installFaqAccordions();
     const removeContactForm = installContactForm();
-    const removeIntegrationLogoExtras = installIntegrationLogoExtras();
     let removePixelEmbers: () => void = () => undefined;
-    let removeTestimonialScroll: () => void = () => undefined;
-    let revealTimer = 0;
+    const removeTestimonialScroll = installTestimonialScroll();
     let revealFallbackTimer = 0;
+    const finishArrival = () => {
+      root.classList.remove("gate-arrival-pending");
+      clearTransitionReveal();
+      window.clearTimeout(revealFallbackTimer);
+    };
 
     root.classList.add("w-mod-js");
-    if (revealTransition) {
-      holdPreloadCovered();
-      revealFallbackTimer = window.setTimeout(() => {
-        forcePreloadRevealComplete();
-        clearTransitionReveal();
-      }, 1500);
-      revealTimer = window.setTimeout(() => {
-        void playPreloadReveal().finally(() => {
-          window.clearTimeout(revealFallbackTimer);
-          clearTransitionReveal();
-        });
-      }, 60);
-    }
+    document.querySelectorAll(".preload:not(#gate-transition-preload)").forEach((item) => item.remove());
+    revealFallbackTimer = window.setTimeout(finishArrival, 3000);
+    window.requestAnimationFrame(finishArrival);
     if ("ontouchstart" in window) root.classList.add("w-mod-touch");
     for (const [key, value] of Object.entries(config.page)) {
       if (value) root.setAttribute(`data-wf-${key}`, value);
@@ -963,6 +858,9 @@ export function GatePageScripts() {
 
     removeWebflowBadge();
     badgeObserver.observe(document.body, { childList: true, subtree: true });
+    document.querySelectorAll<HTMLAnchorElement>(".navbar .navbar-brand-link").forEach((link) => {
+      link.setAttribute("aria-label", "WhiteGate AI ana sayfa");
+    });
     lockHeaderScrambleWidths();
     window.requestAnimationFrame(lockHeaderScrambleWidths);
 
@@ -1003,19 +901,19 @@ export function GatePageScripts() {
       const webflow = (window as typeof window & { Webflow?: { ready?: () => void } }).Webflow;
       webflow?.ready?.();
       removePixelEmbers = installPixelEmbers();
-      removeTestimonialScroll = installTestimonialScroll();
       removeWebflowBadge();
       if (!cancelled && dispatchSyntheticLoad) {
         window.dispatchEvent(new Event("load"));
       }
+      if (!cancelled) finishArrival();
     })();
 
     return () => {
       cancelled = true;
       ran.current = false;
       window.clearTimeout(preloadTimer);
-      window.clearTimeout(revealTimer);
       window.clearTimeout(revealFallbackTimer);
+      if (revealTransition) finishArrival();
       removePixelHoverFallback();
       removePageTransitions();
       removeHeadingTrailingSlashSync();
@@ -1023,7 +921,6 @@ export function GatePageScripts() {
       removeCapabilitiesAutoTabs();
       removeFaqAccordions();
       removeContactForm();
-      removeIntegrationLogoExtras();
       removePixelEmbers();
       removeTestimonialScroll();
       badgeObserver.disconnect();

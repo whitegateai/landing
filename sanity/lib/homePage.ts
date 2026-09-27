@@ -2,6 +2,16 @@ import { defineQuery } from "next-sanity";
 import { cache } from "react";
 import { client } from "./client";
 
+export type HomeScenarioCard = {
+  number: string;
+  team: string;
+  title: string;
+  text: string;
+  steps: string;
+  href: string;
+  image: string;
+};
+
 export type HomePageContent = {
   seoTitle?: string;
   seoDescription?: string;
@@ -15,6 +25,12 @@ export type HomePageContent = {
   ctaWords?: string[];
   ctaTail?: string;
   ctaButtonLabel?: string;
+  nokiaPhoneMessages?: string[];
+  nokiaMobileLink?: string;
+  nokiaCardTitle?: string;
+  nokiaCardHint?: string;
+  nokiaCardAction?: string;
+  scenarioCards?: HomeScenarioCard[];
 };
 
 const HOME_PAGE_QUERY = defineQuery(`*[_type == "homePage" && _id == "homePage"][0]{
@@ -29,7 +45,13 @@ const HOME_PAGE_QUERY = defineQuery(`*[_type == "homePage" && _id == "homePage"]
   ctaLead,
   ctaWords,
   ctaTail,
-  ctaButtonLabel
+  ctaButtonLabel,
+  nokiaPhoneMessages,
+  nokiaMobileLink,
+  nokiaCardTitle,
+  nokiaCardHint,
+  nokiaCardAction,
+  scenarioCards[]{number,team,title,text,steps,href,"image":image.asset->url}
 }`);
 
 export const getHomePageContent = cache(async () => {

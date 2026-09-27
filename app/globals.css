@@ -30,6 +30,111 @@ html.w-mod-js:not(.w-mod-ix3) :is(.team-card-position, .install-process-line) { 
   display: none;
 }
 
+.navbar .navbar-brand-link {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+  width: 188px;
+  padding: 3px 11px 3px 3px;
+  border: 1px solid rgba(23, 33, 46, .8);
+  background: rgba(255, 255, 255, .9);
+  color: #17212e;
+  text-decoration: none;
+}
+
+.whitegate-home-logo {
+  display: block;
+  width: 36px;
+  height: 36px;
+  flex: none;
+}
+
+.whitegate-home-name {
+  white-space: nowrap;
+  font-family: var(--font-family--font-family);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.whitegate-home-name strong { font-weight: 600; }
+
+.navbar .navbar-brand-link:focus-visible {
+  outline: 2px solid #17212e;
+  outline-offset: 3px;
+}
+
+.navbar .navbar-brand-link .hero-top-logo-tag { display: none; }
+
+.navbar .navbar-brand-link .hero-top-logo-img.whitegate-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: auto;
+  color: #17212e;
+  font-family: var(--font-family--font-family);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.navbar .navbar-brand-link .whitegate-mark {
+  display: block;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  background: url("/gate-assets/wg-black-logo-official.png") center / contain no-repeat;
+}
+
+.navbar .navbar-brand-link .whitegate-logotype::after { content: " AI"; }
+
+#gate-transition-preload .preload-square { background-color: var(--whitegate-baby-blue); }
+
+.gate-arrival-cover {
+  position: fixed;
+  z-index: 2147483000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #579cc2;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 380ms ease, visibility 0s linear 380ms;
+}
+
+.gate-arrival-cover img { display: block; width: 42px; height: 120px; object-fit: contain; }
+
+html.gate-arrival-pending .gate-arrival-cover {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: none;
+}
+
+html.gate-arrival-pending .preload:not(#gate-transition-preload) { display: none !important; }
+
+.gate-preload-brand {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(22, 89, 134, .43);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+}
+
+.gate-preload-brand.is-visible { opacity: 1; }
+.gate-preload-brand img { display: block; width: 42px; height: 120px; object-fit: contain; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gate-preload-brand, .gate-arrival-cover { transition: none; }
+}
+
 .whitegate-logo-text,
 .whitegate-logotype {
   white-space: nowrap;
@@ -156,234 +261,86 @@ html.w-mod-js:not(.w-mod-ix3) :is(.team-card-position, .install-process-line) { 
   display: none;
 }
 
-.partner-logo-image {
-  filter: grayscale(1) contrast(1.25);
-  opacity: .72;
-  transition: filter 220ms ease, opacity 220ms ease, transform 220ms ease;
-}
-
-.partner-logo:hover .partner-logo-image {
-  filter: grayscale(0) contrast(1);
-  opacity: 1;
-  transform: translateY(-2px);
-}
-
-/* Normalized tool marks make the integration surface legible without becoming a logo marquee. */
-.partner-logo-marquee {
+.application-strip {
   position: relative;
-  display: grid !important;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 1px;
-  margin-top: 1.25rem;
-  padding: 1.9rem 1px 1px;
-  overflow: hidden;
-  background: #1a1a18;
-  border: 1px solid #1a1a18;
-}
-
-.partner-logo-marquee::before {
-  content: "BAĞLANTI KATMANI / MODEL + OTOMASYON";
-  position: absolute;
-  top: .58rem;
-  left: .75rem;
-  color: rgba(255, 255, 255, .7);
-  font-family: var(--font-family--font-mono), monospace;
-  font-size: .6rem;
-  font-weight: 400;
-  letter-spacing: .11em;
-  line-height: 1;
-}
-
-.partner-logo-wrap {
-  display: contents !important;
-  width: auto !important;
-  transform: none !important;
-  animation: none !important;
-}
-
-.partner-logo-wrap._02 {
-  display: none !important;
-}
-
-html.integration-logo-ready .partner-logo-wrap._02 {
-  display: contents !important;
-}
-
-.partner-logo {
-  position: relative;
-  display: flex !important;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
+  width: 100%;
   min-width: 0;
-  min-height: 6.2rem;
-  padding: 1.05rem .9rem .85rem;
+  min-height: clamp(9rem, 12vw, 11rem);
+  display: flex;
+  align-items: center;
+  padding: 1.4rem 0;
   overflow: hidden;
-  background: #f7f7f3;
-  border: 0;
-  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
-  --integration-index: "00";
-  --integration-layer: "SİSTEM";
-  --integration-name: "TOOL";
+  color: #17212e;
+  isolation: isolate;
+  background: transparent;
 }
 
-.partner-logo::before {
-  content: var(--integration-index) " / " var(--integration-layer);
-  color: #72726d;
-  font-family: var(--font-family--font-mono), monospace;
-  font-size: .56rem;
-  font-weight: 400;
-  letter-spacing: .1em;
-  line-height: 1.2;
+.application-strip::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  background: url("/gate-assets/application-layer-plate-v1.png") center 57% / cover no-repeat;
+  mask-image: radial-gradient(ellipse 72% 60% at center, #000 46%, transparent 100%);
+  filter: blur(3px);
 }
 
-.partner-logo::after {
-  content: var(--integration-name);
-  max-width: 100%;
-  color: #20201e;
-  font-size: clamp(.86rem, 1.2vw, 1.08rem);
+.application-strip-viewport {
+  width: 100%;
+  padding: .85rem 0;
+  overflow: hidden;
+  background: transparent;
+  mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+}
+
+.application-strip-track {
+  display: flex;
+  width: max-content;
+  animation: application-strip-flow 32s linear infinite;
+}
+
+.application-strip-viewport:hover .application-strip-track {
+  animation-play-state: paused;
+}
+
+.application-strip-group {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  margin: 0;
+  padding: 0 clamp(1.5rem, 3vw, 3rem) 0 0;
+  list-style: none;
+}
+
+.application-strip-item {
+  display: flex;
+  flex: 0 0 clamp(8.75rem, 12vw, 11rem);
+  align-items: center;
+  gap: .7rem;
+  white-space: nowrap;
+  font-size: clamp(.88rem, 1.15vw, 1.02rem);
   font-weight: 600;
-  letter-spacing: -.055em;
-  line-height: .95;
-  overflow-wrap: anywhere;
 }
 
-.partner-logo:nth-child(1) {
-  --integration-index: "01";
-  --integration-layer: "ORKESTRASYON";
-  --integration-name: "N8N";
-}
-
-.partner-logo:nth-child(2) {
-  --integration-index: "02";
-  --integration-layer: "MODEL";
-  --integration-name: "CLAUDE";
-}
-
-.partner-logo:nth-child(3) {
-  --integration-index: "03";
-  --integration-layer: "MODEL";
-  --integration-name: "OPENAI";
-}
-
-.partner-logo:nth-child(4) {
-  --integration-index: "04";
-  --integration-layer: "OTOMASYON";
-  --integration-name: "ZAPIER";
-}
-
-.partner-logo:nth-child(5) {
-  --integration-index: "05";
-  --integration-layer: "OTOMASYON";
-  --integration-name: "MAKE";
-}
-
-.partner-logo:nth-child(6) {
-  --integration-index: "06";
-  --integration-layer: "MODEL";
-  --integration-name: "GEMINI";
-}
-
-.partner-logo-wrap._02 .partner-logo:nth-child(1) {
-  --integration-index: "07";
-  --integration-layer: "ÇALIŞMA ALANI";
-  --integration-name: "NOTION";
-}
-
-.partner-logo-wrap._02 .partner-logo:nth-child(2) {
-  --integration-index: "08";
-  --integration-layer: "İLETİŞİM";
-  --integration-name: "SLACK";
-}
-
-.partner-logo-wrap._02 .partner-logo:nth-child(3) {
-  --integration-index: "09";
-  --integration-layer: "CRM";
-  --integration-name: "HUBSPOT";
-}
-
-.partner-logo-wrap._02 .partner-logo:nth-child(4) {
-  --integration-index: "10";
-  --integration-layer: "DOSYA";
-  --integration-name: "DRIVE";
-}
-
-.partner-logo-wrap._02 .partner-logo:nth-child(5) {
-  --integration-index: "11";
-  --integration-layer: "E-POSTA";
-  --integration-name: "GMAIL";
-}
-
-.partner-logo-wrap._02 .partner-logo:nth-child(6) {
-  --integration-index: "12";
-  --integration-layer: "VERİ";
-  --integration-name: "AIRTABLE";
-}
-
-.partner-logo .partner-logo-image {
-  position: static;
-  display: block;
-  width: 1.85rem;
-  height: 1.85rem;
-  margin: .25rem 0;
+.application-strip-item img {
+  width: 1.65rem;
+  height: 1.65rem;
   object-fit: contain;
-  filter: grayscale(1) contrast(1.3) brightness(.32);
-  opacity: .9;
-  pointer-events: none;
-  transition: filter 180ms ease, opacity 180ms ease, transform 180ms ease;
+  filter: grayscale(1) contrast(1.15);
 }
 
-.partner-logo:hover {
-  background: #20201e;
-  color: #f7f7f3;
-  transform: translateY(-3px);
+@keyframes application-strip-flow {
+  to { transform: translateX(-50%); }
 }
 
-.partner-logo:hover::before {
-  color: rgba(247, 247, 243, .58);
+@media (max-width: 767px) {
+  .application-strip { min-height: 8rem; }
 }
 
-.partner-logo:hover::after {
-  color: #f7f7f3;
-}
-
-.partner-logo:hover .partner-logo-image {
-  filter: grayscale(1) brightness(4);
-  opacity: 1;
-  transform: none;
-}
-
-@media screen and (max-width: 991px) {
-  .partner-logo-marquee {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .partner-logo-marquee {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    padding-top: 1.75rem;
-  }
-
-  .partner-logo {
-    min-height: 5.35rem;
-    padding: .85rem .75rem .7rem;
-  }
-
-  .partner-logo::after {
-    font-size: .82rem;
-  }
-
-  .partner-logo::before {
-    font-size: .45rem;
-    letter-spacing: .065em;
-    white-space: nowrap;
-  }
-
-  .partner-logo .partner-logo-image {
-    width: 1.55rem;
-    height: 1.55rem;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .application-strip-track { animation: none; }
+  .application-strip-group[aria-hidden="true"] { display: none; }
 }
 
 .performance-tab-toggle,
@@ -450,18 +407,8 @@ html.integration-logo-ready .partner-logo-wrap._02 {
   will-change: opacity;
 }
 
-.testimonial-slider-mask.testimonial-scroll-active > .testimonial-slide {
-  translate: var(--testimonial-scroll-x, 0px) 0;
-  will-change: translate;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hero .pixel-box-color.pixel-ember {
-    will-change: auto;
-  }
-
-  .testimonial-slider-mask.testimonial-scroll-active > .testimonial-slide {
-    translate: none;
     will-change: auto;
   }
 
@@ -497,6 +444,18 @@ html.integration-logo-ready .partner-logo-wrap._02 {
     flex: none;
     align-self: center;
   }
+
+  .navbar .navbar-brand-link {
+    width: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .whitegate-home-logo { width: 32px; height: 32px; }
+  .whitegate-home-name { font-size: 17px; }
+  .navbar .navbar-brand-link .whitegate-mark { width: 32px; height: 32px; }
+  .navbar .navbar-brand-link .hero-top-logo-img.whitegate-wordmark { font-size: 17px; }
 
   .section .hiw-ray {
     height: 300svh;
@@ -631,14 +590,6 @@ h2.heading-style-h3:has(> .heading-slash + [data-scramble]) {
   transition: width 120ms linear;
 }
 
-.hiw-card-wrap > .hiw-card .hiw-card-desc {
-  opacity: .42 !important;
-}
-
-.hiw-card-wrap > .hiw-card .hiw-card-desc.active {
-  opacity: 1 !important;
-}
-
 .hiw-card-process-dot,
 .hiw-card-inner,
 .hiw-card-title,
@@ -651,6 +602,8 @@ h2.heading-style-h3:has(> .heading-slash + [data-scramble]) {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hiw-card-inner,
+  .hiw-card-desc { opacity: 1 !important; }
   .hiw-card-process-line,
   .hiw-card-process-dot,
   .hiw-card-inner,
@@ -1267,10 +1220,148 @@ html body .waitlist-form-success {
   color: #101214;
 }
 
+html body .capabilities-tag,
+html body .capabilities-tag * {
+  color: #101214;
+}
+
 html body :is(.value-card-icon, .chart-image) {
   filter: hue-rotate(-32deg) saturate(.5) brightness(1.58);
 }
 
 html body .capabilities-image {
   filter: hue-rotate(-27deg) saturate(.62) brightness(1.2);
+}
+.mission-marquee.mission-process {
+  display: block;
+  overflow: visible;
+  padding: 0 2rem 3rem;
+}
+
+.mission-process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid #242424;
+  background: #f7f7f4;
+}
+
+.mission-process-item {
+  display: flex;
+  min-height: 14rem;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border-right: 1px solid #242424;
+  color: #111;
+}
+
+.mission-process-item:last-child { border-right: 0; }
+.mission-process-item span { color: #1874a4; font: 600 .75rem/1.3 monospace; }
+.mission-process-item strong { font-size: clamp(1.15rem, 1.8vw, 1.65rem); line-height: 1.15; }
+.mission-process-item p { max-width: 27ch; margin: auto 0 0; line-height: 1.45; }
+
+@media (max-width: 767px) {
+  .mission-process { padding: 0 1rem 2rem; }
+  .mission-process-grid { grid-template-columns: 1fr; }
+  .mission-process-item { min-height: 0; border-right: 0; border-bottom: 1px solid #242424; }
+  .mission-process-item:last-child { border-bottom: 0; }
+  .mission-process-item p { margin-top: 0; max-width: none; }
+}
+/* Home: the first application, shown as a real task over the existing visual plate. */
+html body .whitegate-home .home-example { background: #f7f8f6; color: #11171c; }
+html body .whitegate-home .home-example .container-base { padding-block: clamp(5rem, 8vw, 8rem); }
+.hero-stage-symbol { color: #237aa5; line-height: 1; }
+.home-example-head { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(18rem, .85fr); align-items: end; gap: 2rem; margin: clamp(2.5rem, 5vw, 4rem) 0 2rem; }
+.home-example-head h2 { max-width: 16ch; margin: 0; }
+.home-example-head p { max-width: 42ch; margin: 0 0 .3rem auto; font-size: clamp(1.05rem, 1.5vw, 1.32rem); line-height: 1.45; }
+.home-example-scene { position: relative; isolation: isolate; overflow: hidden; border: 0; background: transparent; }
+.home-example-scene::before { position: absolute; inset: 0; z-index: 0; content: ''; background: url('/gate-assets/application-cloud-slit-v2.webp') center / cover no-repeat; mask-image: linear-gradient(to bottom, transparent, #000 13%, #000 86%, transparent); opacity: .74; }
+.home-example-flow { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) 2rem minmax(0, 1.22fr) 2rem minmax(0, 1fr); align-items: center; gap: .6rem; padding: clamp(5rem, 8vw, 7rem) clamp(1rem, 3vw, 3rem) clamp(3rem, 5vw, 5rem); }
+.home-example-card { display: flex; min-height: 19rem; flex-direction: column; padding: clamp(1.2rem, 2.2vw, 2rem); border: 0; background: rgba(255,255,255,.82); box-shadow: 0 16px 50px rgba(28,63,79,.065); backdrop-filter: blur(8px); }
+.home-example-card > span { color: #1b6286; font: 600 .72rem/1.3 monospace; letter-spacing: .07em; }
+.home-example-card h3 { margin: auto 0 1.3rem; font-size: clamp(1.4rem, 2vw, 2rem); line-height: 1.15; }
+.home-example-card p { margin: 0; line-height: 1.45; }
+.home-example-ai { min-height: 23rem; background: rgba(249,251,251,.91); }
+.home-example-brand { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.5rem; font-size: .95rem; }
+.home-example-brand img { width: 3rem; height: 3rem; object-fit: contain; }
+.home-example-connector { color: #176287; font: 600 1.65rem/1 monospace; text-align: center; }
+.home-first-decision { position: relative; isolation: isolate; }
+.home-first-decision::before { content: ''; position: absolute; z-index: -1; inset: -2rem -3rem; pointer-events: none; background: url('/gate-assets/first-decision-cloud-v1.webp') center / cover no-repeat; mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 83%, transparent); opacity: .66; }
+
+/* N6 follows page scroll on desktop and keeps direct controls on small screens. */
+html body .home-scenario-slider .testimonial-heading { display: grid; grid-template-columns: 1.2fr .8fr; gap: 2rem; align-items: end; }
+.home-scenario-slider .testimonial-heading p { max-width: 44ch; margin: 0 0 .5rem auto; color: #dce7eb; line-height: 1.5; }
+html body .home-scenario-slider .testimonial-slider-mask { display: flex; width: 100%; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: #6b8792 transparent; }
+html body .home-scenario-slider .testimonial-slide { display: block; flex: 0 0 33.333%; min-width: 0; height: auto; padding-right: .8rem; scroll-snap-align: start; }
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  html body .whitegate-home .section.testimonial { overflow: hidden; }
+  html body .home-scenario-slider .testimonial-slider-mask { overflow: visible; scroll-snap-type: none; }
+  html body .home-scenario-slider .testimonial-slide { translate: var(--testimonial-scroll-x, 0px) 0; will-change: translate; }
+}
+html body .home-scenario-slider .home-scenario-card { display: flex; min-height: 31rem; height: 100%; flex-direction: column; justify-content: stretch; overflow: hidden; border: 1px solid #71818a; background: #f3f5f4; color: #101214; text-decoration: none; }
+.home-scenario-card-light { background: #e5f0f3 !important; }
+.home-scenario-art { height: 13.5rem; overflow: hidden; background: #11171c; }
+.home-scenario-art img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 78%; transition: transform .35s ease; }
+.home-scenario-card:hover .home-scenario-art img { transform: scale(1.035); }
+.home-scenario-body { display: flex; flex: 1; flex-direction: column; padding: clamp(1.15rem, 2vw, 1.7rem); }
+.home-scenario-meta, .home-scenario-bottom { display: flex; justify-content: space-between; gap: .6rem; }
+.home-scenario-meta { color: #245c79; font: 600 .66rem/1.3 monospace; letter-spacing: .05em; }
+.home-scenario-body h3 { margin: 2rem 0 1rem; font-size: clamp(1.4rem, 2vw, 1.9rem); line-height: 1.15; }
+.home-scenario-body p { margin: 0 0 2rem; line-height: 1.45; }
+.home-scenario-bottom { align-items: center; margin-top: auto; padding-top: 1rem; border-top: 1px solid #aab9be; font: 600 .73rem/1.3 monospace; }
+.home-scenario-bottom span:last-child { font-size: 1.4rem; }
+.home-scenario-controls { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 1.4rem; color: #dce7eb; font: 600 .7rem/1.2 monospace; letter-spacing: .08em; }
+.home-scenario-controls > div { display: flex; gap: .5rem; }
+html body .home-scenario-controls .testimonial-slider-btn { position: static; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; padding: 0; border: 1px solid #8ca0aa; background: #141a1e; color: #fff; font: 1.2rem/1 sans-serif; cursor: pointer; }
+.home-scenario-controls .testimonial-slider-btn:disabled { opacity: .35; cursor: default; }
+.home-scenario-slider .testimonial-slider-mask:focus-visible, .home-scenario-controls .testimonial-slider-btn:focus-visible { outline: 2px solid #89cff0; outline-offset: 3px; }
+
+html body .whitegate-home .faq-tab-link { display: block; width: 100%; cursor: pointer; }
+.whitegate-home .faq-tab-link:focus-visible { outline: 2px solid #176287; outline-offset: 3px; }
+
+@media (max-width: 991px) {
+  .home-example-flow { grid-template-columns: 1fr; padding-top: 6rem; }
+  .home-example-connector { transform: rotate(90deg); }
+  .home-example-card, .home-example-ai { min-height: 0; }
+  .home-example-card h3 { margin: 2rem 0 1rem; }
+  html body .home-scenario-slider .testimonial-slide { flex-basis: 50%; }
+}
+@media (max-width: 767px) {
+  .home-example-head, html body .home-scenario-slider .testimonial-heading { grid-template-columns: 1fr; }
+  .home-example-head p, .home-scenario-slider .testimonial-heading p { margin-left: 0; }
+  .home-example-foot { flex-direction: column; gap: .4rem; }
+  html body .home-scenario-slider .testimonial-slide { flex-basis: 88%; }
+  .home-scenario-controls > span { display: none; }
+  .home-scenario-controls { justify-content: flex-end; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-scenario-art img { transition: none; }
+  html body .home-scenario-slider .testimonial-slider-mask { scroll-behavior: auto; }
+  .whitegate-home .capabilities-image video { display: none; }
+}
+
+/* Keep the opening invitation together and give the next panel its own breath. */
+.whitegate-home .hero-content-wrap { justify-content: flex-start; gap: clamp(1.2rem, 2.2vw, 2rem); }
+.whitegate-home .hero-content-desc { margin: 0; }
+.whitegate-home .hero-content-bottom { margin-top: .25rem; }
+.whitegate-home .section.hero { min-height: 0; }
+.whitegate-home .hero-main .hero-layout { padding-bottom: 0; background: transparent; }
+.whitegate-home .hero > .hero-layout { padding-bottom: clamp(2rem, 4vw, 3.5rem); }
+.whitegate-home .application-strip + .positioning { margin-top: clamp(1.5rem, 2.5vw, 2.25rem); }
+.whitegate-home .positioning { min-height: 10rem; padding: clamp(2.25rem, 3.4vw, 3rem) 1.5rem; }
+
+/* One visual surface carries the outgoing and incoming page. */
+#gate-transition-preload { position: fixed; z-index: 2147483000; inset: 0; display: grid; place-items: center; background: #579cc2; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 240ms ease, visibility 0s linear 240ms; }
+#gate-transition-preload.is-visible { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity 240ms ease; }
+#gate-transition-preload .gate-preload-brand { background: transparent; }
+
+/* Deep neutral ground gives the tool marks a quiet, clear edge. */
+.whitegate-home .darkmode { background: radial-gradient(ellipse 68% 42% at 54% 24%, #111a25 0%, #080c12 58%, #05070b 100%); }
+.whitegate-home .capabilities-card { border-color: #25303b; background: rgba(5, 9, 14, .54); }
+.whitegate-home .workflow-item { border-color: #28333e; background: rgba(11, 17, 24, .58); }
+.whitegate-home .workflow-item-logo { max-width: 2rem; object-fit: contain; }
+.whitegate-home .workflow-item-logo:is([src$="/notion.svg"], [src$="/airtable.svg"], [src$="/vercel-mark.svg"]) { filter: brightness(0) invert(.88); }
+
+@media (prefers-reduced-motion: reduce) {
+  #gate-transition-preload { transition: none; }
 }

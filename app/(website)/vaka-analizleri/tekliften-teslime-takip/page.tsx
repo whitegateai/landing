@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { JobPostsAiProductEngineerPage } from "@/components/gate/generated/JobPostsAiProductEngineerPage";
+import { ExampleScenario } from "@/components/gate/ExampleScenariosPage";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Tekliften Teslime Takip | WhiteGate",
-  description: "Teklif, revize, onay ve teslimat akışlarını görünür kılan sistem yaklaşımı.",
-};
+export const metadata: Metadata = createPageMetadata({
+  title: "Tekliften Teslime Takip Örneği | WhiteGate AI",
+  description: "AI destekli teklif takibi nasıl çalışabilir? Talep, taslak, insan onayı ve teslim durumunu anlatan örnek uygulama senaryosu.",
+  path: "/vaka-analizleri/tekliften-teslime-takip",
+});
 
 export default function Page() {
-  return <JobPostsAiProductEngineerPage />;
+  return <ExampleScenario slug="tekliften-teslime-takip" />;
 }

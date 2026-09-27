@@ -12,23 +12,23 @@ export type ServicePage = {
 export const servicePages: ServicePage[] = [
   {
     slug: "ozel-yazilim-gelistirme",
-    title: "Özel Yazılım Geliştirme",
-    seoTitle: "Özel Yazılım Geliştirme Şirketi | WhiteGate",
-    description: "İş akışınıza göre web, mobil, operasyon paneli ve kurum içi yazılım geliştirme hizmeti. İhtiyaç netse doğrudan kapsam ve teklifle, belirsizse AI Dönüşüm Planı ile ilerler.",
-    lead: "Hazır paketlerin işinize uymadığı noktada, operasyonunuza göre tasarlanan ve mevcut araçlarınıza bağlanan yazılımlar geliştiriyoruz.",
-    image: "/gate-assets/whitegate-outputs/logistics.png",
-    imageAlt: "WhiteGate özel yazılım ve operasyon paneli örneği",
+    title: "Şirketinize özel AI uygulaması",
+    seoTitle: "Şirketinize Özel AI Uygulaması | WhiteGate AI",
+    description: "Ekibinizin müşteri taleplerini, şirket bilgisini ve yapılacak işleri tek yerden yöneteceği özel AI uygulamaları geliştiriyoruz.",
+    lead: "Müşteri talebi, şirket bilgisi ve yapılacak iş farklı yerlerde kalmasın. Ekibinizin açıp kullanacağı özel uygulamayı geliştiriyor; AI'ın hazırladığı bilgiyi doğru kişinin ekranına taşıyoruz.",
+    image: "/gate-assets/service-custom-app-v5.webp",
+    imageAlt: "İki kişinin bir iş uygulamasının adımlarını kâğıt üzerinde birlikte planlaması",
     sections: [
       {
-        heading: "Ne zaman özel yazılım gerekir?",
+        heading: "Ekibinizin ekranında ne değişir?",
         paragraphs: [
-          "Ekip aynı bilgiyi Excel, e-posta ve mesajlaşma arasında tekrar tekrar taşıyorsa; hazır yazılım kritik iş kurallarınızı karşılamıyorsa veya süreç görünür değilse özel yazılım anlamlı hale gelir.",
-          "WhiteGate önce kullanıcıları, veri kaynaklarını, sorumluları ve kabul kriterlerini çıkarır. Teknoloji seçimi bu akış netleştikten sonra yapılır.",
+          "Müşteri talebi geldiğinde ekip tek ekranda talebin durumunu, ilgili belgeleri, sorumlu kişiyi ve AI'ın hazırladığı özeti görür. Yapılan işlem kayda geçer; sıradaki kişi işi kaldığı yerden alır.",
+          "Uygulamayı ekibinizin kullandığı işe göre tasarlarız. Mevcut araçlar bu deneyimi sağlıyorsa onları uygulamaya bağlarız.",
         ],
       },
       {
         heading: "Neler geliştiriyoruz?",
-        paragraphs: ["Tek bir ürün kalıbı satmıyoruz. İhtiyaca göre aşağıdaki parçaları aynı sistem içinde birleştiriyoruz."],
+        paragraphs: ["İlk uygulamanın kapsamını seçilen işe göre belirleriz. Gereken ekranları ve bağlantıları birlikte geliştiririz."],
         bullets: [
           "Web ve mobil iş uygulamaları",
           "Operasyon, raporlama ve yönetim panelleri",
@@ -38,34 +38,34 @@ export const servicePages: ServicePage[] = [
         ],
       },
       {
-        heading: "Geliştirme süreci nasıl ilerler?",
+        heading: "Planlıyoruz, geliştiriyoruz, kullanıma alıyoruz",
         paragraphs: [
-          "Keşifte mevcut akış ve darboğazlar çıkarılır. Ardından ilk sürümün kapsamı, ekranları, entegrasyonları ve başarı ölçütleri yazılı hale getirilir.",
-          "Geliştirme gerçek kullanıcı senaryolarıyla test edilir; erişimler, dokümantasyon ve kabul edilen iş akışıyla birlikte canlı kullanıma alınır.",
+          "İlk uygulama henüz net değilse ayrı kapsamı ve bedeli olan AI Dönüşüm Planı ile kullanıcıları, bilgi kaynaklarını ve öncelikleri belirleriz. İhtiyaç netse doğrudan uygulama kapsamı ve teklifini hazırlarız.",
+          "Onaylanan uygulamayı gerçek iş örnekleriyle dener, gerekli erişimleri ve kullanım rehberini hazırlayıp ekiple günlük kullanıma alırız.",
         ],
       },
       {
-        heading: "Teslim edilen şey yalnızca kod değildir",
+        heading: "Teslimde ne olur?",
         paragraphs: [
-          "Çalışan yazılımla birlikte sahiplik, yetki, hata durumu, onay adımı ve bakım yolu da netleşir. Böylece sistem bir demo olarak kalmaz; günlük operasyonun parçası olur.",
+          "Teklifte belirlenen çalışan uygulama, bağlantılar, kullanıcı erişimleri, gerçek iş denemeleri, kullanım rehberi ve ilk destek sınırı teslim edilir. Sonraki bakım ve yeni uygulamalar ayrıca kararlaştırılır.",
         ],
       },
     ],
   },
   {
     slug: "yapay-zeka-otomasyonu",
-    title: "Yapay Zeka Otomasyonu",
-    seoTitle: "Yapay Zeka Otomasyonu ve Süreç Otomasyonu | WhiteGate",
-    description: "Belge, e-posta, CRM, raporlama ve operasyon işlerini insan onaylı yapay zeka otomasyonlarına dönüştürün.",
-    lead: "Tekrar eden bilgi toplama, kontrol, sınıflandırma ve bildirim adımlarını; insan onayı ve izlenebilir kayıtlarla çalışan otomasyonlara dönüştürüyoruz.",
-    image: "/gate-assets/whitegate-outputs/documents.png",
-    imageAlt: "Belge işleme ve yapay zeka otomasyonu akışı",
+    title: "AI ile belge ve e-posta işleri",
+    seoTitle: "Belge ve E-posta İşleri İçin AI Otomasyonu | WhiteGate AI",
+    description: "AI gelen belge ve e-postayı okur, gerekli bilgiyi çıkarır, yanıtı veya sonraki işlemi hazırlar; belirlediğiniz adımları otomatik yürütür.",
+    lead: "Her gelen belgeyi ve e-postayı baştan sona elle okumak zorunda kalmayın. AI gereken bilgiyi bulsun, işi sınıflandırsın ve uygun yanıtı ya da sonraki adımı hazırlasın.",
+    image: "/gate-assets/service-ai-work-v2.webp",
+    imageAlt: "İş belgelerinin arasından incelenmek üzere bir sayfanın seçilmesi",
     sections: [
       {
-        heading: "Yapay zeka otomasyonu neyi çözer?",
+        heading: "Günlük işte nasıl görünür?",
         paragraphs: [
-          "Kuralı belli ama farklı belge ve metinlerle tekrar eden işler, klasik otomasyon ile yapay zekanın birlikte çalıştığı akışlara uygundur.",
-          "Amaç insanı tamamen çıkarmak değil; tekrar eden hazırlığı azaltmak, kritik kararı doğru kişiye taşımak ve işlemin kaydını tutmaktır.",
+          "Yeni bir başvuru e-postası geldiğinde AI ekleri okur, eksik bilgiyi işaretler, kaydı açar ve ilgili kişiye kısa bir özet gönderir. Basit bir bilgi talebini belirlediğiniz sınırlar içinde doğrudan yanıtlayabilir.",
+          "Hangi adımın otomatik ilerleyeceğini, hangi işlemde ekibin onay vereceğini işinize göre birlikte belirleriz.",
         ],
       },
       {
@@ -80,81 +80,81 @@ export const servicePages: ServicePage[] = [
         ],
       },
       {
-        heading: "Kontrolsüz otomasyon kurmuyoruz",
+        heading: "Karar ve kontrol kimde kalır?",
         paragraphs: [
-          "Yetki sınırları, düşük güven skoru, eksik veri ve istisna durumları baştan tanımlanır. Hassas adımlar insan onayı olmadan ilerlemez.",
-          "Girdi, üretilen çıktı, onaylayan kişi ve son işlem kaydı izlenebilir tutulur.",
+          "Uygulamanın hangi bilgiye erişeceği, hangi işlemde duracağı ve kimin onay vereceği kapsamda yazılır. Eksik veri ve istisnalar gerçek örneklerle denenir.",
+          "Teklifte kararlaştırılan kayıtlarda girdi, hazırlanan çıktı ve onay adımı görülebilir olur.",
         ],
       },
       {
-        heading: "Mevcut araçlarla çalışır",
+        heading: "Neyi teslim ederiz?",
         paragraphs: [
-          "Otomasyon; kullandığınız e-posta, doküman, CRM, ERP, mesajlaşma ve veri tabanı sistemlerine API veya güvenli bağlantılar üzerinden eklenir. Gereksiz platform değişikliği yapılmaz.",
+          "Seçilen işi yapan uygulamayı, gerekli ve mümkün olan araç bağlantılarını, hata ve insan onayı yolunu, gerçek görev denemelerini ve ekibin kullanım rehberini birlikte teslim ederiz. Bağlantılar mevcut araçların erişim koşullarına göre kapsamlandırılır.",
         ],
       },
     ],
   },
   {
     slug: "ai-agent-gelistirme",
-    title: "AI Agent Geliştirme",
-    seoTitle: "AI Agent Geliştirme ve Entegrasyon Hizmeti | WhiteGate",
-    description: "Veri kaynakları, araçlar, yetkiler ve insan onayıyla çalışan kuruma özel AI agent sistemleri geliştirin.",
-    lead: "Sadece yanıt üreten chatbotlar yerine, belirli bir görevi araçlar ve veri kaynaklarıyla yürüten kontrollü AI agent sistemleri geliştiriyoruz.",
-    image: "/gate-assets/whitegate-outputs/approval.png",
-    imageAlt: "İnsan onaylı AI agent görev akışı",
+    title: "Şirket bilginizle çalışan AI agent",
+    seoTitle: "Şirket Bilginizle Çalışan AI Agent | WhiteGate AI",
+    description: "Şirket belgelerinde ve bağlı araçlarda bilgi bulan, müşteri veya çalışan sorularını yanıtlayan, belirli görevleri yürüten AI agentlar geliştiriyoruz.",
+    lead: "Ürün kataloğunuzda, şirket belgelerinizde ve kullandığınız araçlarda arama yapabilen bir AI agent geliştirelim. Soruyu anlasın, doğru kaynağı bulsun ve göreve göre yanıt versin ya da işi ekibinize taşısın.",
+    image: "/gate-assets/service-knowledge-agent-v2.webp",
+    imageAlt: "Bir ekip üyesinin kaynak belgeleri ve ürün bilgilerini karşılaştırması",
     sections: [
       {
-        heading: "AI agent ne zaman doğru seçimdir?",
+        heading: "Agent ekibiniz için ne yapar?",
         paragraphs: [
-          "İş yalnızca sabit kurallardan oluşmuyorsa; farklı kaynaklardan bağlam toplamak, seçenek üretmek ve bir sonraki aracı seçmek gerekiyorsa agent yaklaşımı değer yaratabilir.",
-          "Tamamen deterministik bir akış yeterliyse agent eklemeyiz. Daha basit ve bakımı kolay otomasyonu tercih ederiz.",
+          "Satış ekibi bir ürün sorusu aldığında agent onaylı katalogdan bilgiyi bulur, kaynağını gösterir ve yanıt hazırlar. İsterseniz yanıt önce çalışana gelir; uygun sorularda belirlediğiniz sınırlar içinde müşteriye doğrudan da gidebilir.",
+          "İlk görev ve kullanıcısı belli değilse uygun uygulamayı planlarız. İhtiyaç netse doğrudan agentın kapsamını ve teklifini çıkarırız.",
         ],
       },
       {
         heading: "Agent hangi parçalarla çalışır?",
-        paragraphs: ["Agentın erişimi ve hareket alanı açıkça sınırlandırılır."],
+        paragraphs: ["Agentı tek bir somut görevle başlatırız. Görevin gerektirdiği bilgi kaynaklarını, araçları ve işlem sınırlarını bağlarız."],
         bullets: [
           "Kurumsal doküman ve bilgi kaynakları",
           "CRM, ERP, e-posta ve görev sistemleri",
-          "OpenAI, Claude veya Gemini gibi uygun model sağlayıcıları",
+          "Göreve ve veri koşullarına uygun model sağlayıcısı",
           "Araç çağrıları, rol bazlı yetkiler ve veri filtreleri",
           "İnsan onayı, hata kuyruğu ve işlem kayıtları",
         ],
       },
       {
-        heading: "Güvenilirlik nasıl kurulur?",
+        heading: "Ekip hangi kararı elinde tutar?",
         paragraphs: [
           "Agentın ne zaman cevap vermemesi, ne zaman açıklama istemesi ve hangi işlemleri onaya göndermesi gerektiği kabul testleriyle belirlenir.",
-          "Model çıktısı tek başına işlem değildir. Kritik aksiyonlar doğrulama, yetki ve kayıt katmanlarından geçer.",
+          "Sık gelen bilgi soruları otomatik yanıtlanabilir. Para, erişim veya hassas müşteri kararı içeren adımlarda onay ve kayıt sınırlarını ayrıca kurarız.",
         ],
       },
       {
-        heading: "Canlı kullanım ve iyileştirme",
+        heading: "Canlı kullanıma nasıl geçer?",
         paragraphs: [
-          "Başarı yalnızca örnek promptlarla değil; gerçek görev tamamlama, hata oranı, insan müdahalesi ve işlem süresi üzerinden izlenir. Yeni istisnalar kontrollü biçimde sisteme eklenir.",
+          "Gerçek görevlerle deneme yapar, çıktıyı ekiple kontrol eder, kullanım rehberini ve ilk destek sorumlusunu netleştiririz. Bakım ve yeni görevler gerekiyorsa ayrıca kapsamlandırılır.",
         ],
       },
     ],
   },
   {
     slug: "sistem-entegrasyonu",
-    title: "Sistem Entegrasyonu",
-    seoTitle: "Sistem Entegrasyonu ve API Entegrasyonu | WhiteGate",
-    description: "CRM, ERP, e-posta, doküman, mesajlaşma ve veri tabanlarını güvenli API entegrasyonlarıyla tek iş akışında bağlayın.",
-    lead: "Birbirinden kopuk araçlar arasında manuel veri taşımayı azaltıyor; sistemleri güvenli, izlenebilir ve bakım yapılabilir bağlantılarla birleştiriyoruz.",
-    image: "/gate-assets/whitegate-outputs/workflow.png",
-    imageAlt: "CRM ERP ve API sistem entegrasyonu akışı",
+    title: "Mevcut araçlarınıza AI bağlantısı",
+    seoTitle: "Mevcut İş Araçlarına AI Entegrasyonu | WhiteGate AI",
+    description: "AI uygulamanızı CRM, e-posta, belge ve diğer iş araçlarınıza bağlıyoruz; gereken bilgiyi alıp sonucu doğru yere taşımasını sağlıyoruz.",
+    lead: "AI uygulaması şirketinizdeki işi görebilsin. CRM'deki kaydı, e-postadaki talebi ve dosyalardaki bilgiyi gerektiği yerde bir araya getirip sonucu kullandığınız araca taşıyalım.",
+    image: "/gate-assets/service-connected-tools-v3.webp",
+    imageAlt: "Çalışanın iş uygulaması, veri tablosu ve belgeyi birlikte incelemesi",
     sections: [
       {
-        heading: "Entegrasyon problemi nasıl görünür?",
+        heading: "Bağlantı günlük işte neyi değiştirir?",
         paragraphs: [
-          "Aynı müşteri veya iş kaydı birden fazla yerde tutuluyor, ekipler CSV indirip yüklüyor ya da bir sistemdeki değişiklik diğerine geç ulaşabiliyorsa bağlantı katmanı eksiktir.",
-          "İlk adım veri sahipliğini, ana kayıt kaynağını ve güncelleme yönünü belirlemektir.",
+          "Müşteri talebi CRM'de açıldığında ilgili belge, sorumlu kişi ve son yazışma uygulamada görünür. AI bunlardan özet hazırlar; sonuç doğru kayda veya ilgili kişiye gider.",
+          "Önce hangi kaydın esas alınacağını, hangi bilginin aktarılacağını ve bağlantı kesilirse işin nasıl sürdürüleceğini belirleriz.",
         ],
       },
       {
         heading: "Bağladığımız sistem türleri",
-        paragraphs: ["Entegrasyon mevcut altyapıyı değiştirmeden, desteklenen bağlantı yöntemleriyle kurulur."],
+        paragraphs: ["Bağlanacak araçları markalara göre değil, seçilen uygulamanın yapacağı işe göre belirleriz. Gerçek bağlantı imkânı ilgili araçların erişim ve API koşullarına bağlıdır."],
         bullets: [
           "CRM ve ERP sistemleri",
           "E-posta, takvim ve mesajlaşma araçları",
@@ -164,16 +164,16 @@ export const servicePages: ServicePage[] = [
         ],
       },
       {
-        heading: "Hata ve veri güvenliği",
+        heading: "Erişim ve hata durumunda ne olur?",
         paragraphs: [
           "Kimlik doğrulama, erişim yetkisi, veri alanı eşleştirmesi ve hassas bilgi sınırları kurulumun parçasıdır.",
-          "Başarısız işlemler kaybolmaz; tekrar deneme, hata kuyruğu, bildirim ve manuel müdahale yolu tanımlanır.",
+          "Başarısız aktarımın nasıl fark edileceği ve kimin müdahale edeceği teklifte tanımlanır. Gereken yerde tekrar deneme, uyarı ve manuel işlem yolu kurulur.",
         ],
       },
       {
-        heading: "Canlıya alma yaklaşımı",
+        heading: "Teslim ve kullanıma alma",
         paragraphs: [
-          "Bağlantılar önce sınırlı veri ve gerçek senaryolarla doğrulanır. Veri tutarlılığı ve geri dönüş yolu görüldükten sonra kontrollü biçimde canlı trafiğe açılır.",
+          "Bağlantıyı gerçek iş senaryolarıyla doğrular, veri alanlarını ve yetkileri kontrol ederiz. Kullanıcılar bağlantının ürettiği bilgiyi nerede göreceğini ve hata halinde kime başvuracağını bilir.",
         ],
       },
     ],
@@ -181,22 +181,22 @@ export const servicePages: ServicePage[] = [
   {
     slug: "n8n-otomasyon",
     title: "n8n Otomasyon",
-    seoTitle: "n8n Otomasyon ve Entegrasyon Hizmeti | WhiteGate",
-    description: "n8n ile API, CRM, e-posta, belge ve yapay zeka iş akışları kurun. İnsan onaylı, izlenebilir ve bakım yapılabilir otomasyonlar.",
-    lead: "n8n’i tek başına amaç değil, API’leri, veriyi ve onay adımlarını bağlayan bir orkestrasyon katmanı olarak kullanıyoruz.",
+    seoTitle: "n8n Otomasyon ve AI Bağlantıları | WhiteGate AI",
+    description: "Uygun işlerde n8n ile AI uygulaması, e-posta, CRM ve belgeler arasında görev ve onay bağlantıları kuruyoruz.",
+    lead: "Seçilen iş için uygunsa n8n ile AI uygulamasını mevcut araçlarınıza bağlarız. Bilgi bir yerden gelir, gerekli işlem hazırlanır, karar gereken noktada ekibiniz devreye girer.",
     image: "/gate-assets/whitegate-outputs/workflow.png",
     imageAlt: "n8n iş akışı otomasyonu ve entegrasyon örneği",
     sections: [
       {
-        heading: "n8n hangi işler için uygundur?",
+        heading: "n8n ekibinize nasıl hizmet eder?",
         paragraphs: [
-          "Webhook, API, zamanlanmış görev, veri dönüştürme ve çok adımlı bildirim akışları n8n ile hızlı ve görünür biçimde kurulabilir.",
-          "Akışın karmaşıklığı, güvenlik ihtiyacı ve işletim yükü değerlendirildikten sonra n8n Cloud, self-hosted kurulum veya kod tabanlı alternatif seçilir.",
+          "Örneğin bir form gönderildiğinde n8n kaydı ilgili araca taşır, AI'a özet hazırlatır ve sonucu kontrol edecek kişiye iletir. Çalışan onayladıktan sonra sonraki adım çalışır.",
+          "n8n yalnızca uygun işlerde seçilir. Bağlantıların erişimi, veri koşulları ve bakım sorumluluğu teknoloji kararından önce değerlendirilir.",
         ],
       },
       {
         heading: "Kurulabilecek n8n akışları",
-        paragraphs: ["Her akış sahiplik, hata yönetimi ve kabul kriterleriyle birlikte teslim edilir."],
+        paragraphs: ["Bunlar olası uygulamalardır; hangi işin kurulacağı kapsamda seçilir."],
         bullets: [
           "Form veya e-postadan CRM kaydı ve görev oluşturma",
           "Belge işleme ve AI destekli sınıflandırma",
@@ -206,16 +206,16 @@ export const servicePages: ServicePage[] = [
         ],
       },
       {
-        heading: "Demo değil, işletilebilir otomasyon",
+        heading: "Kontrol ve hata yolu",
         paragraphs: [
-          "Kimlik bilgileri güvenli değişkenlerde tutulur; erişimler sınırlandırılır. Hata durumları, tekrar deneme ve uyarı yolları akışın içine eklenir.",
-          "Kritik kararlar insan onayına bağlanır ve her adımın girdisi ile sonucu izlenebilir olur.",
+          "Erişim yetkileri, hata uyarıları ve tekrar deneme yolu seçilen işin gereğine göre kurulup gerçek örneklerle kontrol edilir.",
+          "Kritik kararlarda insan onayı ve işlem kaydı kapsamda açıkça tanımlanır.",
         ],
       },
       {
-        heading: "Bakım ve devir",
+        heading: "Ekibinize ne teslim edilir?",
         paragraphs: [
-          "Akış adları, değişkenler, bağlantılar ve sorumluluklar okunabilir biçimde düzenlenir. Erişimler ve dokümantasyon teslim edilir; ihtiyaç varsa izleme ve iyileştirme devam eder.",
+          "Onaylanan otomasyon, bağlantı ve yetki listesi, hata halinde izlenecek yol ve kullanım notları teslim edilir. İlk kullanımdaki destek sınırı teklifte yazılır; sürekli bakım gerekiyorsa ayrıca kararlaştırılır.",
         ],
       },
     ],

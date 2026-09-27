@@ -5,7 +5,7 @@ import { getBlogPosts } from "@/sanity/lib/editorial";
 
 export const metadata: Metadata = createPageMetadata({
   title: "AI Dönüşümü ve AI Uygulamaları Rehberleri | WhiteGate",
-  description: "AI uygulamaları, agentlar, otomasyonlar, entegrasyonlar ve insan onaylı iş akışları üzerine uygulanabilir WhiteGate rehberleri.",
+  description: "Şirketiniz için ilk AI uygulaması nasıl seçilir, AI agent ne zaman gerekir, tekliften teslime takip nasıl kurulur? Somut WhiteGate rehberleri.",
   path: "/yayinlar",
 });
 

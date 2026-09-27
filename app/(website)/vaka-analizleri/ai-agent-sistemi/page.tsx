@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { JobPostsMachineLearningEngineerPage } from "@/components/gate/generated/JobPostsMachineLearningEngineerPage";
+import { ExampleScenario } from "@/components/gate/ExampleScenariosPage";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "AI Agent Sistemi | WhiteGate",
-  description: "Belirli görevleri insan onayı ve veri kaynaklarıyla yürüten AI agent yaklaşımı.",
-};
+export const metadata: Metadata = createPageMetadata({
+  title: "Ürün Bilgisi AI Asistanı Örneği | WhiteGate AI",
+  description: "Müşteri sorusunu şirket belgelerinde araştırıp kaynaklı yanıt taslağı hazırlayan, çalışan onayıyla kullanılan AI asistanı örneği.",
+  path: "/vaka-analizleri/ai-agent-sistemi",
+});
 
 export default function Page() {
-  return <JobPostsMachineLearningEngineerPage />;
+  return <ExampleScenario slug="ai-agent-sistemi" />;
 }

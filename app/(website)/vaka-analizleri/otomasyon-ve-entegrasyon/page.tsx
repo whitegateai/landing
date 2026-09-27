@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
-import { JobPostsAiWorkflowEngineerPage } from "@/components/gate/generated/JobPostsAiWorkflowEngineerPage";
+import { ExampleScenario } from "@/components/gate/ExampleScenariosPage";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Otomasyon ve Entegrasyon | WhiteGate",
-  description: "Tekrar eden operasyon adımlarını mevcut araçlara bağlayan sistem yaklaşımı.",
-};
+export const metadata: Metadata = createPageMetadata({
+  title: "Talep ve Araç Bağlantısı Örneği | WhiteGate AI",
+  description: "Gelen talebi sınıflandırıp insan kontrolüyle mevcut iş araçlarına yönlendiren örnek AI uygulaması senaryosu.",
+  path: "/vaka-analizleri/otomasyon-ve-entegrasyon",
+});
 
 export default function Page() {
-  return <JobPostsAiWorkflowEngineerPage />;
+  return <ExampleScenario slug="otomasyon-ve-entegrasyon" />;
 }

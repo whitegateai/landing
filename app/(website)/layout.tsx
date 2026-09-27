@@ -38,6 +38,11 @@ export default function WebsiteLayout({ children }: Readonly<{ children: ReactNo
       />
       <link rel="stylesheet" href="/gate-css/shared.css" />
       <div className="gate-arrival-cover" aria-hidden="true">
+        <div className="gate-arrival-grid">
+          {Array.from({ length: 100 }, (_, index) => (
+            <span key={index} style={{ animationDelay: `${350 + ((index * 37) % 100) * 8}ms` }} />
+          ))}
+        </div>
         <img src="/gate-assets/whitegate-slit-white.png" alt="" width="42" height="120" />
       </div>
       <GatePageScripts />

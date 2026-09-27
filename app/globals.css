@@ -99,6 +99,10 @@ html.w-mod-js:not(.w-mod-ix3) :is(.team-card-position, .install-process-line) { 
   100% { opacity: 0; visibility: hidden; }
 }
 
+@keyframes gate-square-clear {
+  to { opacity: 0; }
+}
+
 @keyframes gate-transition-release {
   0% { opacity: 0; visibility: visible; }
   8%, 82% { opacity: 1; visibility: visible; }
@@ -111,21 +115,23 @@ html.w-mod-js:not(.w-mod-ix3) :is(.team-card-position, .install-process-line) { 
   inset: 0;
   display: grid;
   place-items: center;
-  background: var(--gate-loading-blue);
+  background: transparent;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity 380ms ease, visibility 0s linear 380ms;
+  animation: gate-arrival-release 1.8s ease-out forwards;
 }
 
-.gate-arrival-cover img { display: block; width: 42px; height: 120px; object-fit: contain; filter: drop-shadow(0 1px 4px rgba(41, 91, 119, .24)); }
+.gate-arrival-grid { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); grid-template-rows: repeat(10, minmax(0, 1fr)); }
+.gate-arrival-grid span { background: var(--gate-loading-blue); animation: gate-square-clear 260ms linear forwards; }
+.gate-arrival-cover img { position: relative; display: block; width: 42px; height: 120px; object-fit: contain; filter: drop-shadow(0 1px 4px rgba(41, 91, 119, .24)); }
 
 html.gate-arrival-pending .gate-arrival-cover {
   opacity: 1;
   visibility: visible;
   pointer-events: none;
   transition: none;
-  animation: gate-arrival-release 1.8s ease-out forwards;
 }
 
 html.gate-arrival-pending .preload:not(#gate-transition-preload) { display: none !important; }
@@ -147,7 +153,8 @@ html.gate-arrival-pending .preload:not(#gate-transition-preload) { display: none
 
 @media (prefers-reduced-motion: reduce) {
   .gate-preload-brand, .gate-arrival-cover { transition: none; }
-  .gate-arrival-cover { animation-timing-function: steps(1, end); }
+  .gate-arrival-cover { animation-duration: 1ms; }
+  .gate-arrival-grid span { animation-duration: 1ms; animation-delay: 0ms !important; }
 }
 
 .whitegate-logo-text,

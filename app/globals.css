@@ -92,26 +92,40 @@ html.w-mod-js:not(.w-mod-ix3) :is(.team-card-position, .install-process-line) { 
 
 #gate-transition-preload .preload-square { background-color: var(--whitegate-baby-blue); }
 
+:root { --gate-loading-blue: #9dbfd2; }
+
+@keyframes gate-arrival-release {
+  0%, 72% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+@keyframes gate-transition-release {
+  0% { opacity: 0; visibility: visible; }
+  8%, 82% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
 .gate-arrival-cover {
   position: fixed;
   z-index: 2147483000;
   inset: 0;
   display: grid;
   place-items: center;
-  background: #579cc2;
+  background: var(--gate-loading-blue);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity 380ms ease, visibility 0s linear 380ms;
 }
 
-.gate-arrival-cover img { display: block; width: 42px; height: 120px; object-fit: contain; }
+.gate-arrival-cover img { display: block; width: 42px; height: 120px; object-fit: contain; filter: drop-shadow(0 1px 4px rgba(41, 91, 119, .24)); }
 
 html.gate-arrival-pending .gate-arrival-cover {
   opacity: 1;
   visibility: visible;
-  pointer-events: auto;
+  pointer-events: none;
   transition: none;
+  animation: gate-arrival-release 1.8s ease-out forwards;
 }
 
 html.gate-arrival-pending .preload:not(#gate-transition-preload) { display: none !important; }
@@ -133,6 +147,7 @@ html.gate-arrival-pending .preload:not(#gate-transition-preload) { display: none
 
 @media (prefers-reduced-motion: reduce) {
   .gate-preload-brand, .gate-arrival-cover { transition: none; }
+  .gate-arrival-cover { animation-timing-function: steps(1, end); }
 }
 
 .whitegate-logo-text,
@@ -1351,8 +1366,8 @@ html body .whitegate-home .faq-tab-link { display: block; width: 100%; cursor: p
 .whitegate-home .positioning { min-height: 10rem; padding: clamp(2.25rem, 3.4vw, 3rem) 1.5rem; }
 
 /* One visual surface carries the outgoing and incoming page. */
-#gate-transition-preload { position: fixed; z-index: 2147483000; inset: 0; display: grid; place-items: center; background: #579cc2; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 240ms ease, visibility 0s linear 240ms; }
-#gate-transition-preload.is-visible { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity 240ms ease; }
+#gate-transition-preload { position: fixed; z-index: 2147483000; inset: 0; display: grid; place-items: center; background: var(--gate-loading-blue); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 240ms ease, visibility 0s linear 240ms; }
+#gate-transition-preload.is-visible { opacity: 1; visibility: visible; pointer-events: auto; animation: gate-transition-release 3s ease-out forwards; }
 #gate-transition-preload .gate-preload-brand { background: transparent; }
 
 /* Deep neutral ground gives the tool marks a quiet, clear edge. */
@@ -1364,4 +1379,5 @@ html body .whitegate-home .faq-tab-link { display: block; width: 100%; cursor: p
 
 @media (prefers-reduced-motion: reduce) {
   #gate-transition-preload { transition: none; }
+  #gate-transition-preload.is-visible { animation-timing-function: steps(1, end); }
 }

@@ -125,7 +125,7 @@ html.w-mod-js:not(.w-mod-ix3) :is(.team-card-position, .install-process-line) { 
 
 .gate-arrival-grid { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); grid-template-rows: repeat(10, minmax(0, 1fr)); }
 .gate-arrival-grid span { background: var(--gate-loading-blue); animation: gate-square-clear 260ms linear forwards; }
-.gate-arrival-cover img { position: relative; display: block; width: 42px; height: 120px; object-fit: contain; filter: drop-shadow(0 1px 4px rgba(41, 91, 119, .24)); }
+.gate-arrival-cover img { position: relative; display: block; width: 42px; height: 120px; object-fit: contain; filter: drop-shadow(0 1px 4px rgba(41, 91, 119, .24)); animation: gate-square-clear 420ms ease 1000ms forwards; }
 
 html.gate-arrival-pending .gate-arrival-cover {
   opacity: 1;
@@ -155,6 +155,7 @@ html.gate-arrival-pending .preload:not(#gate-transition-preload) { display: none
   .gate-preload-brand, .gate-arrival-cover { transition: none; }
   .gate-arrival-cover { animation-duration: 1ms; }
   .gate-arrival-grid span { animation-duration: 1ms; animation-delay: 0ms !important; }
+  .gate-arrival-cover img { animation-duration: 1ms; animation-delay: 0ms; }
 }
 
 .whitegate-logo-text,
@@ -448,6 +449,22 @@ html.gate-arrival-pending .preload:not(#gate-transition-preload) { display: none
 }
 
 @media screen and (max-width: 767px) {
+  html body .blog-tabs::before {
+    display: block;
+    margin: 0 0 .6rem;
+    color: #2679a5;
+    font: 600 .7rem/1.3 Geistmono, monospace;
+    letter-spacing: .06em;
+    content: "KATEGORİLERİ KAYDIR  →";
+  }
+
+  .blog-tab-menu {
+    scrollbar-width: none;
+    mask-image: linear-gradient(to right, #000 0%, #000 88%, transparent 100%);
+  }
+
+  .blog-tab-menu::-webkit-scrollbar { display: none; }
+
   .navbar .whitegate-mark,
   .navbar .hero-top-logo-tag {
     display: none;
@@ -472,7 +489,27 @@ html.gate-arrival-pending .preload:not(#gate-transition-preload) { display: none
     padding: 0;
     border: 0;
     background: transparent;
+    min-height: 44px;
   }
+
+  .navbar .nav_menu-button { display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; }
+
+  .navbar .nav-menu.w--open {
+    top: 72px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: .75rem 1.5rem 1.5rem;
+    border-top: 1px solid #d7e0e4;
+    border-bottom: 1px solid #b9c8cf;
+    background: #fff;
+    box-shadow: 0 18px 28px rgb(20 55 71 / 10%);
+  }
+
+  .navbar .nav-menu-wrap { width: 100%; align-items: stretch; }
+  .navbar .nav-menu .navlink { width: 100%; min-height: 44px; align-items: center; border-bottom: 1px solid #e2e8eb; }
+  .navbar .nav-button-wrapper.mobile { width: 100%; margin-top: 1rem; }
+  .navbar .nav-button-wrapper.mobile .button-nav { width: 100%; min-height: 44px; justify-content: space-between; }
 
   .whitegate-home-logo { width: 32px; height: 32px; }
   .whitegate-home-name { font-size: 17px; }
@@ -500,6 +537,8 @@ html.gate-arrival-pending .preload:not(#gate-transition-preload) { display: none
     position: sticky;
     top: calc((100svh - 20rem) / 2);
   }
+
+  .section .hiw-ray { height: 230svh; }
 
   .footer .footer-layout {
     gap: 1.5rem;
@@ -582,8 +621,15 @@ html.gate-arrival-pending .preload:not(#gate-transition-preload) { display: none
 }
 
 @media screen and (max-width: 479px) {
+  .whitegate-home .hero-heading-wrap,
+  .whitegate-home .hero-heading.heading {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
   .hero-heading > [data-typewriter] {
-    font-size: min(1em, 11vw);
+    font-size: min(1em, 9.7vw);
   }
 
   .cta-top {
@@ -1342,6 +1388,7 @@ html body .whitegate-home .faq-tab-link { display: block; width: 100%; cursor: p
 .whitegate-home .faq-tab-link:focus-visible { outline: 2px solid #176287; outline-offset: 3px; }
 
 @media (max-width: 991px) {
+  .home-first-decision::before { inset: -2rem 0; }
   .home-example-flow { grid-template-columns: 1fr; padding-top: 6rem; }
   .home-example-connector { transform: rotate(90deg); }
   .home-example-card, .home-example-ai { min-height: 0; }
@@ -1376,6 +1423,7 @@ html body .whitegate-home .faq-tab-link { display: block; width: 100%; cursor: p
 #gate-transition-preload { position: fixed; z-index: 2147483000; inset: 0; display: grid; place-items: center; background: var(--gate-loading-blue); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 240ms ease, visibility 0s linear 240ms; }
 #gate-transition-preload.is-visible { opacity: 1; visibility: visible; pointer-events: auto; animation: gate-transition-release 3s ease-out forwards; }
 #gate-transition-preload .gate-preload-brand { background: transparent; }
+#gate-transition-preload.is-visible .gate-preload-brand { animation: gate-square-clear 420ms ease 1000ms forwards; }
 
 /* Deep neutral ground gives the tool marks a quiet, clear edge. */
 .whitegate-home .darkmode { background: radial-gradient(ellipse 68% 42% at 54% 24%, #111a25 0%, #080c12 58%, #05070b 100%); }

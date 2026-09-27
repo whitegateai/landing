@@ -21,7 +21,7 @@ export default function Page() {
                 <div className="blog_detail-header-info"><div className="blog-card-tag">İş akışı</div></div>
                 <h1 className="heading-style-h2">Manuel işler nasıl otomatikleştirilir? İlk akışı seçme rehberi</h1>
               </div>
-              <img src="/gate-assets/journal-first-step-v1.webp" loading="lazy" alt="Manuel işten düzenli iş akışına geçiş için soyut görsel" className="blog_detail-image" />
+              <img src="/gate-assets/journal-manual-workflow-v1.webp" loading="lazy" alt="Manuel taleplerden takip edilen iş akışına geçişi gösteren ofis masası" className="blog_detail-image" />
             </div>
           </div></div></div>
         </section>

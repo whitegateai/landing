@@ -240,9 +240,12 @@
 @media (max-width: 700px) {
   .hero { min-height: 700px; }
   .scene {
-    top: calc(50% - 30px);
-    width: max(100%, calc(177.7778vh + 106.667px));
-    height: calc(100% + 60px);
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    height: min(68svh, 600px);
+    transform: translateX(-50%);
+    mask-image: linear-gradient(to bottom, transparent, #000 12%);
   }
   .content { width: calc(100% - 32px); padding-top: 96px; }
   .brandKicker { margin-bottom: 15px; font-size: 10px; }
@@ -250,6 +253,7 @@
   .content p { max-width: 330px; margin-top: 21px; font-size: 14px; line-height: 1.5; }
   .content .mobileCaseLink { display: inline-block; margin-top: 14px; color: #17212e; font: 600 12px/1.2 "Inter", Arial, sans-serif; text-decoration: underline; text-underline-offset: 3px; pointer-events: auto; }
   .phoneMessage { font-size: 12px; }
+  .scrollDoodle { display: none; }
 }
 
 @media (max-width: 1100px) {

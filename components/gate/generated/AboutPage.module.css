@@ -56,6 +56,10 @@
   .root :global(.mission-process-grid) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
+@media (max-width: 800px) {
+  .root :global(.section.header) { height: 392px; min-height: 392px; }
+}
+
 @media (max-width: 600px) {
   .root :global(.mission-marquee.mission-process) { width: min(100% - 2rem, 72rem); }
   .root :global(.mission-process-grid) { grid-template-columns: 1fr; }

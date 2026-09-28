@@ -95,10 +95,6 @@ function ensurePreloadBrand(preload: HTMLElement) {
   preload.appendChild(brand);
 }
 
-function showPreloadBrand(preload: HTMLElement, visible: boolean) {
-  preload.querySelector(".gate-preload-brand")?.classList.toggle("is-visible", visible);
-}
-
 function markTransitionReveal() {
   try {
     window.sessionStorage.setItem(TRANSITION_STORAGE_KEY, "1");
@@ -134,6 +130,14 @@ function getTransitionPreload() {
   ensurePreloadBrand(preload);
   preload.id = "gate-transition-preload";
   preload.setAttribute("aria-hidden", "true");
+  const grid = document.createElement("div");
+  grid.className = "gate-arrival-grid";
+  for (let index = 0; index < 100; index += 1) {
+    const square = document.createElement("span");
+    square.style.animationDelay = `${((index * 37) % 100) * 5}ms`;
+    grid.appendChild(square);
+  }
+  preload.prepend(grid);
   document.body.appendChild(preload);
   return preload;
 }
@@ -142,8 +146,7 @@ async function playPreloadCover() {
   const preload = getTransitionPreload();
   document.documentElement.classList.add("gate-is-transitioning");
   preload.classList.add("is-visible");
-  showPreloadBrand(preload, true);
-  await delay(window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 360);
+  await delay(window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 620);
 }
 
 function lockHeaderScrambleWidths() {

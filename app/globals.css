@@ -111,10 +111,8 @@ html.w-mod-js:not(.w-mod-ix3) :is(.team-card-position, .install-process-line) { 
   to { opacity: 0; }
 }
 
-@keyframes gate-transition-release {
-  0% { opacity: 0; visibility: visible; }
-  8%, 82% { opacity: 1; visibility: visible; }
-  100% { opacity: 0; visibility: hidden; pointer-events: none; }
+@keyframes gate-square-fill {
+  to { opacity: 1; }
 }
 
 .gate-arrival-cover {
@@ -1447,10 +1445,12 @@ html body .whitegate-home .faq-tab-link { display: block; width: 100%; cursor: p
 .whitegate-home .positioning { min-height: 10rem; padding: clamp(2.25rem, 3.4vw, 3rem) 1.5rem; }
 
 /* One visual surface carries the outgoing and incoming page. */
-#gate-transition-preload { position: fixed; z-index: 2147483000; inset: 0; display: grid; place-items: center; background: var(--gate-loading-blue); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 240ms ease, visibility 0s linear 240ms; }
-#gate-transition-preload.is-visible { opacity: 1; visibility: visible; pointer-events: auto; animation: gate-transition-release 3s ease-out forwards; }
-#gate-transition-preload .gate-preload-brand { background: transparent; }
-#gate-transition-preload.is-visible .gate-preload-brand { animation: gate-square-clear 420ms ease 1000ms forwards; }
+#gate-transition-preload { position: fixed; z-index: 2147483000; inset: 0; display: grid; place-items: center; opacity: 0; visibility: hidden; pointer-events: none; }
+#gate-transition-preload.is-visible { opacity: 1; visibility: visible; pointer-events: auto; }
+#gate-transition-preload .gate-arrival-grid span { background: var(--gate-loading-blue); opacity: 0; }
+#gate-transition-preload.is-visible .gate-arrival-grid span { animation: gate-square-fill 120ms steps(1, end) forwards; }
+#gate-transition-preload .gate-preload-brand { background: transparent; opacity: 0; }
+#gate-transition-preload.is-visible .gate-preload-brand { animation: gate-square-fill 160ms ease 480ms both; }
 
 /* Deep neutral ground gives the tool marks a quiet, clear edge. */
 .whitegate-home .darkmode { background: radial-gradient(ellipse 68% 42% at 54% 24%, #111a25 0%, #080c12 58%, #05070b 100%); }
@@ -1460,6 +1460,6 @@ html body .whitegate-home .faq-tab-link { display: block; width: 100%; cursor: p
 .whitegate-home .workflow-item-logo:is([src$="/notion.svg"], [src$="/airtable.svg"], [src$="/vercel-mark.svg"]) { filter: brightness(0) invert(.88); }
 
 @media (prefers-reduced-motion: reduce) {
-  #gate-transition-preload { transition: none; }
-  #gate-transition-preload.is-visible { animation-timing-function: steps(1, end); }
+  #gate-transition-preload.is-visible .gate-arrival-grid span { animation-duration: 1ms; animation-delay: 0ms !important; }
+  #gate-transition-preload.is-visible .gate-preload-brand { animation-duration: 1ms; animation-delay: 0ms; }
 }

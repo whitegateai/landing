@@ -346,20 +346,25 @@ html.gate-arrival-pending .preload:not(#gate-transition-preload) { display: none
 
 .application-strip-item {
   display: flex;
-  flex: 0 0 clamp(8.75rem, 12vw, 11rem);
+  flex: none;
+  min-width: clamp(8.75rem, 12vw, 11rem);
   align-items: center;
   gap: .7rem;
+  width: max-content;
   white-space: nowrap;
   font-size: clamp(.88rem, 1.15vw, 1.02rem);
   font-weight: 600;
 }
 
 .application-strip-item img {
+  flex: none;
   width: 1.65rem;
   height: 1.65rem;
   object-fit: contain;
   filter: grayscale(1) contrast(1.15);
 }
+
+.application-strip-item span { flex: none; }
 
 @keyframes application-strip-flow {
   to { transform: translateX(-50%); }
@@ -367,6 +372,7 @@ html.gate-arrival-pending .preload:not(#gate-transition-preload) { display: none
 
 @media (max-width: 767px) {
   .application-strip { min-height: 8rem; }
+  .application-strip-item { min-width: 10rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

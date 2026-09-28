@@ -260,8 +260,8 @@
   .content p { max-width: 330px; margin: 21px auto 0; font-size: 14px; line-height: 1.5; }
   .primaryCta { width: min(100%, 330px); min-height: 54px; margin: 19px auto 0; font-size: 14px; }
   .content .mobileCaseLink { display: inline-block; margin-top: 12px; color: #435362; font: 500 11px/1.2 Geist, Arial, sans-serif; text-decoration: underline; text-underline-offset: 3px; pointer-events: auto; }
-  .phoneMessage { left: 44.5%; width: 30%; transform: translateX(-50%); font-size: clamp(7.5px, 2.1vw, 9px); text-align: center; }
-  .readLabel { top: 72.6%; left: 44.5%; }
+  .phoneMessage { left: 45.3%; width: 30%; transform: translateX(-50%); font-size: clamp(6.5px, calc(2.1vw - 1px), 8px); text-align: center; }
+  .readLabel { top: 72.6%; left: 44.5%; font-size: 13px; }
   .scrollDoodle { display: none; }
 }
 

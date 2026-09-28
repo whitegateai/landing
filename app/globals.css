@@ -1,4 +1,11 @@
 html.w-mod-js:not(.w-mod-ix3) :is(.team-card-position, .install-process-line) { visibility: hidden !important; }
+@font-face {
+  font-family: "Geist Pixel Circle";
+  src: url("/gate-assets/GeistPixel-Circle.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
 .w-nav-overlay { display: none; }
 .w-nav-menu.w--open { display: block !important; transform: translateY(0) !important; }
 .w-dropdown-list.w--open { display: block !important; }
@@ -36,7 +43,8 @@ html.w-mod-js:not(.w-mod-ix3) :is(.team-card-position, .install-process-line) { 
   align-items: center;
   gap: 10px;
   box-sizing: border-box;
-  width: 188px;
+  width: max-content;
+  min-width: 188px;
   padding: 3px 11px 3px 3px;
   border: 1px solid rgba(23, 33, 46, .8);
   background: rgba(255, 255, 255, .9);
@@ -53,8 +61,8 @@ html.w-mod-js:not(.w-mod-ix3) :is(.team-card-position, .install-process-line) { 
 
 .whitegate-home-name {
   white-space: nowrap;
-  font-family: var(--font-family--font-family);
-  font-size: 20px;
+  font-family: "Geist Pixel Circle", Geist, sans-serif;
+  font-size: 21px;
   font-weight: 600;
   line-height: 1;
 }
@@ -74,8 +82,8 @@ html.w-mod-js:not(.w-mod-ix3) :is(.team-card-position, .install-process-line) { 
   gap: 10px;
   height: auto;
   color: #17212e;
-  font-family: var(--font-family--font-family);
-  font-size: 20px;
+  font-family: "Geist Pixel Circle", Geist, sans-serif;
+  font-size: 21px;
   font-weight: 600;
   line-height: 1;
 }
@@ -512,9 +520,9 @@ html.gate-arrival-pending .preload:not(#gate-transition-preload) { display: none
   .navbar .nav-button-wrapper.mobile .button-nav { width: 100%; min-height: 44px; justify-content: space-between; }
 
   .whitegate-home-logo { width: 32px; height: 32px; }
-  .whitegate-home-name { font-size: 17px; }
+  .whitegate-home-name { font-size: 19px; }
   .navbar .navbar-brand-link .whitegate-mark { width: 32px; height: 32px; }
-  .navbar .navbar-brand-link .hero-top-logo-img.whitegate-wordmark { font-size: 17px; }
+  .navbar .navbar-brand-link .hero-top-logo-img.whitegate-wordmark { font-size: 19px; }
 
   .section .hiw-ray {
     height: 300svh;
@@ -797,12 +805,25 @@ h2.heading-style-h3:has(> .heading-slash + [data-scramble]) {
   justify-content: flex-start;
 }
 
+.whitegate-home .capabilities-card-workflow {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.whitegate-home .capabilities-card-workflow .workflow-item {
+  flex: none;
+  width: 3.5rem;
+  padding: 0;
+}
+
 @keyframes workflow-marquee-left {
+  from { transform: translateX(0); }
   to { transform: translateX(-100%); }
 }
 
 @keyframes workflow-marquee-right {
   from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {

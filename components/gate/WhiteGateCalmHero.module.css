@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap");
 @import url("https://db.onlinewebfonts.com/c/440b53b1a1c65037f944ff19259d8014?family=Nokia+Cellphone+FC+Small");
 
 .hero {
@@ -9,7 +8,7 @@
   min-height: 680px;
   background: #f3f4ed;
   color: #17212e;
-  font-family: "Inter", Arial, sans-serif;
+  font-family: Geist, Arial, sans-serif;
 }
 
 .scene {
@@ -131,39 +130,26 @@
 .content {
   position: relative;
   z-index: 2;
-  width: min(92%, 880px);
+  width: min(calc(100% - 2 * clamp(24px, 6vw, 110px)), 1300px);
   margin: 0 auto;
-  padding-top: clamp(64px, 9vh, 112px);
-  text-align: center;
+  padding-top: clamp(80px, 10vh, 125px);
+  text-align: left;
   pointer-events: none;
-}
-.brandKicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 18px;
-  color: #17212e;
-  font: 600 12px/1.2 "Inter", Arial, sans-serif;
-  letter-spacing: .1em;
-}
-.brandKicker span {
-  padding-left: 12px;
-  border-left: 1px solid rgba(23, 33, 46, .4);
-  font-weight: 400;
 }
 .content h1 {
   margin: 0;
-  color: #17212e;
-  font-family: "Instrument Serif", Georgia, serif;
-  font-size: clamp(49px, 5.7vw, 88px);
+  color: #080b10;
+  font-family: "Geist Pixel Circle", Geist, sans-serif;
+  font-size: clamp(58px, 4.4vw, 86px);
   font-weight: 400;
-  letter-spacing: -.035em;
-  line-height: 1.12;
+  letter-spacing: 0;
+  line-height: 1.04;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .45);
   animation: titleEnter 1.5s cubic-bezier(.16,1,.3,1) both;
 }
 .content p {
-  max-width: 640px;
-  margin: 26px auto 0;
+  max-width: 650px;
+  margin: 14px 0 0;
   color: rgba(23,33,46,.76);
   font-size: clamp(15px, 1.16vw, 18px);
   font-weight: 400;
@@ -171,27 +157,27 @@
   animation: bodyEnter 1.2s .3s cubic-bezier(.16,1,.3,1) both;
 }
 .primaryCta {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  gap: 14px;
   width: fit-content;
-  min-height: 50px;
-  margin: 22px auto 0;
+  min-height: 52px;
+  margin: 18px 0 0;
   padding: 0 17px;
-  background: #111820;
-  color: #fff;
-  font: 600 13px/1.2 "Inter", Arial, sans-serif;
+  border: 1px solid rgba(23, 33, 46, .58);
+  border-radius: 3px;
+  background: rgba(255, 255, 250, .93);
+  box-shadow: 4px 4px 0 rgba(23, 33, 46, .12);
+  color: #17212e;
+  font: 600 14px/1.2 Geist, Arial, sans-serif;
   text-decoration: none;
+  text-align: left;
   pointer-events: auto;
-  transition: background-color 180ms ease, transform 180ms ease;
+  transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
 }
-.primaryCta:hover { background: #274b61; transform: translateY(-2px); }
+.primaryCta:hover { background: #fff; transform: translate(-2px, -2px); box-shadow: 6px 6px 0 rgba(23, 33, 46, .12); }
 .primaryCta:focus-visible { outline: 2px solid #111820; outline-offset: 4px; }
-.ctaMark { display: block; width: 7px; height: 7px; background: #fff; }
-@media (min-width: 1101px) {
-  .primaryCta { position: absolute; top: max(390px, 44vh); left: 0; margin: 0; }
-}
 .caseCard {
   position: absolute;
   z-index: 3;
@@ -217,9 +203,9 @@
 }
 .caseCard:focus-visible, .mobileCaseLink:focus-visible { outline: 2px solid #17212e; outline-offset: 5px; }
 .caseCard img { display: block; width: 128px; height: 91px; object-fit: contain; align-self: center; margin: 1px 0 4px; }
-.caseCard strong { font: 400 30px/.97 "Instrument Serif", Georgia, serif; letter-spacing: -.025em; }
-.caseHint { margin-top: 10px; font: 400 11px/1.4 "Inter", Arial, sans-serif; color: #4e5965; }
-.caseAction { display: flex; justify-content: space-between; width: 100%; margin-top: 16px; padding-top: 10px; border-top: 1px dashed rgba(23,33,46,.3); font: 600 11px/1.2 "Inter", Arial, sans-serif; }
+.caseCard strong { font: 400 24px/1.08 "Geist Pixel Circle", Geist, sans-serif; }
+.caseHint { margin-top: 10px; font: 400 11px/1.4 Geist, Arial, sans-serif; color: #4e5965; }
+.caseAction { display: flex; justify-content: space-between; width: 100%; margin-top: 16px; padding-top: 10px; border-top: 1px dashed rgba(23,33,46,.3); font: 600 11px/1.2 Geist, Arial, sans-serif; }
 .mobileCaseLink { display: none; }
 .doodleArrow {
   position: absolute;
@@ -237,7 +223,7 @@
   top: 77%;
   left: 31%;
   transform: rotate(-6deg);
-  font: italic 23px/1 "Instrument Serif", Georgia, serif;
+  font: 500 14px/1.2 "Geist Mono", monospace;
   white-space: nowrap;
 }
 .scrollDoodle {
@@ -250,7 +236,7 @@
   align-items: center;
   transform: translateX(-50%) rotate(-3deg);
   color: #285d78;
-  font: italic 20px/1 "Instrument Serif", Georgia, serif;
+  font: 500 13px/1.2 "Geist Mono", monospace;
   white-space: nowrap;
   pointer-events: none;
 }
@@ -269,12 +255,11 @@
     transform: translateX(-50%);
     mask-image: linear-gradient(to bottom, transparent, #000 12%);
   }
-  .content { width: calc(100% - 32px); padding-top: 96px; }
-  .brandKicker { margin-bottom: 15px; font-size: 10px; }
-  .content h1 { font-size: clamp(44px, 12vw, 62px); }
-  .content p { max-width: 330px; margin-top: 21px; font-size: 14px; line-height: 1.5; }
-  .primaryCta { min-height: 54px; margin-top: 19px; font-size: 14px; }
-  .content .mobileCaseLink { display: inline-block; margin-top: 12px; color: #435362; font: 500 11px/1.2 "Inter", Arial, sans-serif; text-decoration: underline; text-underline-offset: 3px; pointer-events: auto; }
+  .content { width: calc(100% - 32px); padding-top: 120px; text-align: center; }
+  .content h1 { font-size: clamp(38px, 10vw, 54px); }
+  .content p { max-width: 330px; margin: 21px auto 0; font-size: 14px; line-height: 1.5; }
+  .primaryCta { width: min(100%, 330px); min-height: 54px; margin: 19px auto 0; font-size: 14px; }
+  .content .mobileCaseLink { display: inline-block; margin-top: 12px; color: #435362; font: 500 11px/1.2 Geist, Arial, sans-serif; text-decoration: underline; text-underline-offset: 3px; pointer-events: auto; }
   .phoneMessage { left: 47%; width: auto; transform: translateX(-50%); font-size: 12px; }
   .scrollDoodle { display: none; }
 }
@@ -288,12 +273,7 @@
 }
 
 @media (min-width: 701px) and (max-width: 1100px) {
-  .content .mobileCaseLink { display: inline-block; margin-top: 14px; color: #17212e; font: 600 12px/1.2 "Inter", Arial, sans-serif; text-decoration: underline; text-underline-offset: 3px; pointer-events: auto; }
-}
-
-@media (min-width: 901px) and (max-width: 1100px) {
-  .primaryCta { position: absolute; top: max(390px, 44vh); left: -20px; margin: 0; }
-  .content .mobileCaseLink { position: absolute; top: calc(max(390px, 44vh) + 62px); left: -20px; margin: 0; }
+  .content .mobileCaseLink { display: inline-block; margin-top: 14px; color: #17212e; font: 600 12px/1.2 Geist, Arial, sans-serif; text-decoration: underline; text-underline-offset: 3px; pointer-events: auto; }
 }
 
 @media (max-width: 991px), (hover: none) {

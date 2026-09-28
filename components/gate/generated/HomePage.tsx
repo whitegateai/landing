@@ -105,7 +105,7 @@ const workflowLogoRows = {
 function WorkflowLogoLine({ row }: { row: keyof typeof workflowLogoRows }) {
   return <div className={`workflow-item-line ${row}`} aria-label={row === "_01" ? "Çalışma araçları örnekleri" : "Uygulama ve model araçları örnekleri"}>
     {[0, 1, 2].map((repeat) => <div className="workflow-item-wrap" aria-hidden={repeat > 0} key={repeat}>
-      {workflowLogoRows[row].map(([file, name]) => <div className="workflow-item" key={file}><img loading="lazy" src={`/gate-assets/brand-logos/${file}`} alt={repeat === 0 ? `${name} logosu` : ""} className="workflow-item-logo" /></div>)}
+      {workflowLogoRows[row].map(([file, name]) => <div className="workflow-item" key={file}><img src={`/gate-assets/brand-logos/${file}`} alt={repeat === 0 ? `${name} logosu` : ""} className="workflow-item-logo" /></div>)}
     </div>)}
   </div>;
 }

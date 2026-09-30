@@ -4,6 +4,7 @@ import { DocsPostsInstallationPage } from "@/components/gate/generated/DocsPosts
 export const metadata: Metadata = {
   title: "Kurulum | WhiteGate",
   description: "WhiteGate sistem kurulumu ve canlıya alma yaklaşımı.",
+  alternates: { canonical: "/rehberler/baslangic" },
 };
 
 export default function Page() {

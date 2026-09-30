@@ -252,7 +252,6 @@ html.gate-arrival-pending .preload:not(#gate-transition-preload) { display: none
 }
 
 .footer .footer-link:is(
-  [href="/404"],
   [href="/utility-pages/changelog"],
   [href="/kullanim-sartlari"],
   [href="/gizlilik-politikasi"],

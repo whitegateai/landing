@@ -4,6 +4,7 @@ import { DocsPostsConnectingPage } from "@/components/gate/generated/DocsPostsCo
 export const metadata: Metadata = {
   title: "Bağlantılar | WhiteGate",
   description: "CRM, ERP, e-posta, doküman ve veri kaynaklarını bağlama yaklaşımı.",
+  alternates: { canonical: "/rehberler/entegrasyon-ozeti" },
 };
 
 export default function Page() {

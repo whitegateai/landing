@@ -4,6 +4,7 @@ import { DocsPostsSdksUsagePage } from "@/components/gate/generated/DocsPostsSdk
 export const metadata: Metadata = {
   title: "Araçlar ve Kullanım | WhiteGate",
   description: "WhiteGate sistemlerinin ekipler tarafından kullanımı.",
+  alternates: { canonical: "/rehberler/entegrasyon-ozeti" },
 };
 
 export default function Page() {

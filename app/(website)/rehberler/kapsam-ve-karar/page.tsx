@@ -4,6 +4,7 @@ import { DocsPostsAiProcessingPage } from "@/components/gate/generated/DocsPosts
 export const metadata: Metadata = {
   title: "Kapsam ve karar | WhiteGate",
   description: "WhiteGate AI agentları ve AI destekli operasyon sistemleri.",
+  alternates: { canonical: "/rehberler/surec-ve-baglam" },
 };
 
 export default function Page() {

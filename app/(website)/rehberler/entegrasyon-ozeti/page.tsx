@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { DocsPostsApiOverviewPage } from "@/components/gate/generated/DocsPostsApiOverviewPage";
 
 export const metadata: Metadata = {
-  title: "Entegrasyon Özeti | WhiteGate",
-  description: "WhiteGate sistemlerinin mevcut araçlarla entegrasyon yaklaşımı.",
+  title: "AI Entegrasyonu ve İş Araçları | WhiteGate",
+  description: "Mevcut iş araçlarını AI uygulamasına bağlarken erişim, veri akışı ve hata sınırlarını nasıl ele aldığımızı görün.",
 };
 
 export default function Page() {

@@ -6,7 +6,15 @@ import styles from "./effects.module.css";
 export default function MachineLayout({ children }: { children: ReactNode }) {
   return <>
     {children}
-    <div className={styles.reveal} aria-hidden="true" data-machine-reveal="" />
+    <div className={styles.reveal} aria-hidden="true" data-machine-reveal="">
+      <div className={styles.boot}>
+        <div className={styles.bootLabel} lang="en">
+          <span>WHITEGATE AI</span>
+          <small>INITIALIZING MACHINE VIEW</small>
+          <i />
+        </div>
+      </div>
+    </div>
     <div className={styles.scanlines} aria-hidden="true" />
   </>;
 }

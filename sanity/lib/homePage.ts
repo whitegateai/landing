@@ -1,6 +1,7 @@
 import { defineQuery } from "next-sanity";
 import { cache } from "react";
 import { client } from "./client";
+import { canonicalHomePageContent } from "@/lib/home-content";
 
 export type HomeScenarioCard = {
   number: string;
@@ -63,4 +64,20 @@ export const getHomePageContent = cache(async () => {
     console.error("Sanity homePage fetch failed; using static content.", error);
     return null;
   }
+});
+
+// Human and Machine share the same accepted copy and permitted CMS overrides.
+export const getResolvedHomePageContent = cache(async (): Promise<Required<HomePageContent>> => {
+  const cms = await getHomePageContent();
+  return {
+    ...canonicalHomePageContent,
+    nokiaPhoneMessages: cms?.nokiaPhoneMessages?.filter(Boolean).length ? cms.nokiaPhoneMessages.filter(Boolean) : canonicalHomePageContent.nokiaPhoneMessages,
+    nokiaMobileLink: cms?.nokiaMobileLink?.trim() || canonicalHomePageContent.nokiaMobileLink,
+    nokiaCardTitle: cms?.nokiaCardTitle?.trim() || canonicalHomePageContent.nokiaCardTitle,
+    nokiaCardHint: cms?.nokiaCardHint?.trim() || canonicalHomePageContent.nokiaCardHint,
+    nokiaCardAction: cms?.nokiaCardAction?.trim() || canonicalHomePageContent.nokiaCardAction,
+    scenarioCards: cms?.scenarioCards?.length && cms.scenarioCards.every((card) =>
+      card.number && card.team && card.title && card.text && card.steps && card.href?.startsWith("/") && card.image
+    ) ? cms.scenarioCards : canonicalHomePageContent.scenarioCards,
+  };
 });

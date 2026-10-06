@@ -1,0 +1,82 @@
+@font-face {
+  font-family: "WG Mode Mono";
+  src: url("/gate-assets/69cb64d4d70024900677ff1a_GeistMono-Regular-54dc320fbf.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.wrapper {
+  position: fixed;
+  z-index: 10000;
+  inset: auto 0 0;
+  display: flex;
+  justify-content: center;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 300ms cubic-bezier(.4, 0, .2, 1);
+}
+
+.switch {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  border-radius: 9999px;
+  color: #263d48;
+  font: 400 12px/16px "WG Mode Mono", ui-monospace, monospace;
+  letter-spacing: 0;
+  pointer-events: auto;
+}
+
+/* A recessed 32px surface sits inside genuine 44px interactive targets. */
+.switch::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 6px 0;
+  border: 1px solid rgb(255 255 255 / 65%);
+  border-radius: inherit;
+  background: rgb(235 244 243 / 82%);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 3px rgb(23 33 46 / 17%), inset 0 -1px 0 rgb(255 255 255 / 80%);
+  pointer-events: none;
+}
+
+.switch a,
+.switch span {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: inherit;
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+
+.switch span[aria-current] { color: #102f3f; font-weight: 600; }
+.switch a:hover { color: #0b516c; }
+.switch a:focus-visible { outline: 2px solid #174c60; outline-offset: 2px; }
+
+.wrapper[data-mode="machine"] .switch { color: #e6f4fa; }
+.wrapper[data-mode="machine"] .switch::before {
+  border-color: rgb(56 189 248 / 38%);
+  background: rgb(4 14 20 / 94%);
+  box-shadow: inset 0 1px 3px #000, inset 0 -1px 0 rgb(56 189 248 / 12%);
+}
+.wrapper[data-mode="machine"] .switch span[aria-current],
+.wrapper[data-mode="machine"] .switch a:hover { color: #38bdf8; }
+.wrapper[data-mode="machine"] .switch a:focus-visible { outline-color: #38bdf8; }
+.footerHidden { opacity: 0; }
+.footerHidden .switch { pointer-events: none; }
+.footerHidden .switch a,
+.footerHidden .switch span { pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .wrapper { transition: none; }
+}

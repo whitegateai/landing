@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { GatePageScripts } from "@/components/gate/GatePageScripts";
+import { SiteModeSwitch } from "@/components/gate/SiteModeSwitch";
 import { DEFAULT_DESCRIPTION, organizationJsonLd, SITE_URL } from "@/lib/seo";
 import "../globals.css";
 
@@ -48,6 +49,7 @@ export default function WebsiteLayout({ children }: Readonly<{ children: ReactNo
       </div>
       <GatePageScripts />
       {children}
+      <SiteModeSwitch mode="human" />
     </>
   );
 }

@@ -769,6 +769,8 @@ function installPageTransitions() {
   let navigating = false;
 
   const isInternalLink = (anchor: HTMLAnchorElement) => {
+    // Mode navigation uses its own terminal arrival, rather than the Human cover.
+    if (anchor.closest("[data-site-mode-switch]")) return false;
     const href = anchor.getAttribute("href");
     if (!href || href.startsWith("#") || anchor.target || anchor.hasAttribute("download")) return false;
     const url = new URL(anchor.href, window.location.href);

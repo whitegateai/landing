@@ -1,3 +1,5 @@
+import { getLocale } from "@/lib/locale-server";
+import { localizeTree } from "@/lib/localize-tree";
 const applications = [
   { name: "Gmail", logo: "gmail-mark.png" },
   { name: "Google Drive", logo: "google-drive-mark.png" },
@@ -8,7 +10,7 @@ const applications = [
 
 export function ApplicationStrip() {
   return (
-    <section className="application-strip" aria-label="Uygulama katmanı">
+    localizeTree(<section className="application-strip" aria-label="Uygulama katmanı">
       <div className="application-strip-viewport">
         <div className="application-strip-track">
           {[false, true].map((duplicate) => (
@@ -23,6 +25,6 @@ export function ApplicationStrip() {
           ))}
         </div>
       </div>
-    </section>
+    </section>, getLocale())
   );
 }

@@ -1,3 +1,5 @@
+import { getLocale } from "@/lib/locale-server";
+import { localizeTree } from "@/lib/localize-tree";
 import type { ReactNode } from "react";
 import type { EditorialListItem } from "@/sanity/lib/editorial";
 import { CmsCaseCards } from "@/components/cms/EditorialCards";
@@ -55,31 +57,31 @@ export type ExampleSlug = keyof typeof examples;
 
 function Shell({ children }: { children: ReactNode }) {
   return (
-    <div className="page-wrapper">
+    localizeTree(<div className="page-wrapper">
       <DocsPostsIntroductionGlobalStyles />
       <DocsPostsIntroductionNav />
       <main className="main-wrapper">{children}</main>
       <DocsPostsIntroductionFooter />
-    </div>
+    </div>, getLocale())
   );
 }
 
 function Contact({ title }: { title: string }) {
   return (
-    <section className={styles.contact}>
+    localizeTree(<section className={styles.contact}>
       <div className={styles.inner}>
         <span className={styles.code}>[ SONRAKİ ADIM ]</span>
         <h2>{title}</h2>
         <p>Uygunluk Görüşmesi’nde işinizi ve kullandığınız araçları dinleriz. İlk uygulama netse kapsam ve teklife geçeriz; belirsizse ayrı bir AI Dönüşüm Planı gerekip gerekmediğine karar veririz.</p>
         <a href="/iletisim" className={styles.button}>Uygunluk Görüşmesi <span aria-hidden="true">↗</span></a>
       </div>
-    </section>
+    </section>, getLocale())
   );
 }
 
 export function ExampleScenariosIndex({ cases = [] }: { cases?: EditorialListItem[] }) {
   return (
-    <Shell>
+    localizeTree(<Shell>
       <section className={styles.hero}>
         <div className={styles.inner}>
           <span className={styles.code}>[ N.01 / ÖRNEK UYGULAMALAR ]</span>
@@ -127,14 +129,14 @@ export function ExampleScenariosIndex({ cases = [] }: { cases?: EditorialListIte
       </section>
       <CmsCaseCards cases={cases} />
       <Contact title="Kendi şirketinizde ilk uygulama ne olabilir?" />
-    </Shell>
+    </Shell>, getLocale())
   );
 }
 
 export function ExampleScenario({ slug }: { slug: ExampleSlug }) {
   const item = examples[slug];
   return (
-    <Shell>
+    localizeTree(<Shell>
       <article>
         <section className={styles.hero}>
           <div className={styles.inner}>
@@ -181,6 +183,6 @@ export function ExampleScenario({ slug }: { slug: ExampleSlug }) {
         </section>
       </article>
       <Contact title="Bu işi şirketinizde denemek ister misiniz?" />
-    </Shell>
+    </Shell>, getLocale())
   );
 }

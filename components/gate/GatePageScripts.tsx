@@ -682,7 +682,7 @@ function installContactForm() {
     const data = new FormData(form);
     if (submit) {
       submit.disabled = true;
-      submit.value = "Gönderiliyor…";
+      submit.value = document.documentElement.lang === "en" ? "Sending…" : "Gönderiliyor…";
     }
     failure?.style.setProperty("display", "none");
 
@@ -707,7 +707,7 @@ function installContactForm() {
     } finally {
       if (submit) {
         submit.disabled = false;
-        submit.value = "Gönder";
+        submit.value = document.documentElement.lang === "en" ? "Send" : "Gönder";
       }
     }
   };
@@ -805,7 +805,7 @@ export function GatePageScripts() {
     if (ran.current) return;
     ran.current = true;
 
-    const path = window.location.pathname.replace(/\/$/, "") || "/";
+    const path = window.location.pathname.replace(/^\/en(?=\/|$)/, "").replace(/\/$/, "") || "/";
     const runtimePath =
       ({
         "/hakkimizda": "/about",
@@ -864,7 +864,7 @@ export function GatePageScripts() {
     removeWebflowBadge();
     badgeObserver.observe(document.body, { childList: true, subtree: true });
     document.querySelectorAll<HTMLAnchorElement>(".navbar .navbar-brand-link").forEach((link) => {
-      link.setAttribute("aria-label", "WhiteGate AI ana sayfa");
+      link.setAttribute("aria-label", root.lang === "en" ? "WhiteGate AI home" : "WhiteGate AI ana sayfa");
     });
     lockHeaderScrambleWidths();
     window.requestAnimationFrame(lockHeaderScrambleWidths);

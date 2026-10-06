@@ -1,23 +1,25 @@
+import { getLocale } from "@/lib/locale-server";
+import { localizeTree } from "@/lib/localize-tree";
 import type { EditorialListItem } from "@/sanity/lib/editorial";
 import { imageUrl } from "@/sanity/lib/image";
 
 function dateLabel(value: string) {
-  return new Intl.DateTimeFormat("tr-TR", { day: "numeric", month: "long", year: "numeric" }).format(new Date(value));
+  return new Intl.DateTimeFormat(getLocale() === "en" ? "en-US" : "tr-TR", { day: "numeric", month: "long", year: "numeric" }).format(new Date(value));
 }
 
 function Cover({ item }: { item: EditorialListItem }) {
   if (!item.coverImage) {
-    return <img src="/gate-assets/whitegate-logomark-black.svg" alt="" className="cms-editorial-placeholder" />;
+    return localizeTree(<img src="/gate-assets/whitegate-logomark-black.svg" alt="" className="cms-editorial-placeholder" />, getLocale());
   }
 
-  return <img src={imageUrl(item.coverImage, 1000)} alt={item.coverImage.alt || ""} loading="lazy" className="blog-card-img" />;
+  return localizeTree(<img src={imageUrl(item.coverImage, 1000)} alt={item.coverImage.alt || ""} loading="lazy" className="blog-card-img" />, getLocale());
 }
 
 export function CmsBlogCards({ posts }: { posts: EditorialListItem[] }) {
   if (!posts.length) return null;
 
   return (
-    <section className="section cms-editorial-section">
+    localizeTree(<section className="section cms-editorial-section">
       <div className="padding-global"><div className="container-base">
         <div className="cms-editorial-heading"><span>//</span> YENİ YAYINLAR</div>
         <div className="cms-editorial-grid">
@@ -41,7 +43,7 @@ export function CmsBlogCards({ posts }: { posts: EditorialListItem[] }) {
           ))}
         </div>
       </div></div>
-    </section>
+    </section>, getLocale())
   );
 }
 
@@ -49,7 +51,7 @@ export function CmsCaseCards({ cases }: { cases: EditorialListItem[] }) {
   if (!cases.length) return null;
 
   return (
-    <section className="section cms-editorial-section">
+    localizeTree(<section className="section cms-editorial-section">
       <div className="padding-global"><div className="container-base">
         <div className="cms-editorial-heading"><span>//</span> YAYINLANAN ÇALIŞMALAR</div>
         <div className="job-collection-list w-dyn-items">
@@ -76,6 +78,6 @@ export function CmsCaseCards({ cases }: { cases: EditorialListItem[] }) {
           ))}
         </div>
       </div></div>
-    </section>
+    </section>, getLocale())
   );
 }

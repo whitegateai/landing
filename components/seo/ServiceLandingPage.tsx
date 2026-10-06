@@ -1,3 +1,5 @@
+import { getLocale } from "@/lib/locale-server";
+import { localizeTree } from "@/lib/localize-tree";
 import {
   DocsPostsIntroductionCtaSection,
   DocsPostsIntroductionFooter,
@@ -13,7 +15,7 @@ export function ServiceLandingPage({ service }: { service: ServicePage }) {
   const number = String(servicePages.indexOf(service) + 1).padStart(2, "0");
 
   return (
-    <div className="page-wrapper">
+    localizeTree(<div className="page-wrapper">
       <DocsPostsIntroductionGlobalStyles />
       <DocsPostsIntroductionNav />
       <main className="main-wrapper">
@@ -77,6 +79,6 @@ export function ServiceLandingPage({ service }: { service: ServicePage }) {
       </main>
       <DocsPostsIntroductionCtaSection />
       <DocsPostsIntroductionFooter />
-    </div>
+    </div>, getLocale())
   );
 }

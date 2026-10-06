@@ -1,3 +1,5 @@
+import { getLocale } from "@/lib/locale-server";
+import { localizeTree } from "@/lib/localize-tree";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/types";
 import type { SanityImageSource } from "@sanity/image-url";
@@ -40,7 +42,7 @@ const portableComponents: PortableTextComponents = {
 };
 
 function dateLabel(value: string) {
-  return new Intl.DateTimeFormat("tr-TR", { day: "numeric", month: "long", year: "numeric" }).format(new Date(value));
+  return new Intl.DateTimeFormat(getLocale() === "en" ? "en-US" : "tr-TR", { day: "numeric", month: "long", year: "numeric" }).format(new Date(value));
 }
 
 function Article({ document, kind }: { document: EditorialDocument; kind: "blog" | "case" }) {
@@ -59,7 +61,7 @@ function Article({ document, kind }: { document: EditorialDocument; kind: "blog"
   } : null;
 
   return (
-    <>
+    localizeTree(<>
       {articleJsonLd ? (
         <script
           type="application/ld+json"
@@ -85,26 +87,26 @@ function Article({ document, kind }: { document: EditorialDocument; kind: "blog"
         </div></div>
       </section>
       </main>
-    </>
+    </>, getLocale())
   );
 }
 
 export function CmsBlogPostPage({ document }: { document: EditorialDocument }) {
   return (
-    <div className="page-wrapper">
+    localizeTree(<div className="page-wrapper">
       <PostGlobalStyles /><PostPreload /><PostNav />
       <Article document={document} kind="blog" />
       <PostCtaSection /><PostFooter />
-    </div>
+    </div>, getLocale())
   );
 }
 
 export function CmsCaseStudyPage({ document }: { document: EditorialDocument }) {
   return (
-    <div className="page-wrapper">
+    localizeTree(<div className="page-wrapper">
       <JobPostsAiProductEngineerGlobalStyles /><JobPostsAiProductEngineerPreload /><JobPostsAiProductEngineerNav />
       <Article document={document} kind="case" />
       <JobPostsAiProductEngineerCtaSection /><JobPostsAiProductEngineerFooter />
-    </div>
+    </div>, getLocale())
   );
 }

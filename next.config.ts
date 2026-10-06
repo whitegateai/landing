@@ -46,6 +46,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       ...permanentRedirects.map(([source, destination]) => ({ source, destination, permanent: true })),
+      ...permanentRedirects.map(([source, destination]) => ({ source: `/en${source}`, destination: `/en${destination}`, permanent: true })),
       { source: "/post/:slug", destination: "/yayinlar/:slug", permanent: true },
       { source: "/job-posts/:slug", destination: "/vaka-analizleri/:slug", permanent: true },
     ];

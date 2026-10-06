@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { HomePageContent } from "@/sanity/lib/homePage";
 import styles from "./WhiteGateCalmHero.module.css";
+import { useLocale } from "./LocaleProvider";
+import { localizeTree } from "@/lib/localize-tree";
 
 const VIDEO_URL = "/gate-assets/whitegate-calm-loop-tr.mp4";
 
@@ -115,8 +117,9 @@ function TypingMessages({ messages }: { messages: string[] }) {
 }
 
 export function WhiteGateCalmHero({ content }: { content: NokiaContent }) {
-  return (
-    <section className={styles.hero} aria-labelledby="whitegate-calm-title">
+  const locale = useLocale();
+  return localizeTree((
+    <section className={styles.hero} data-locale={locale} aria-labelledby="whitegate-calm-title">
       <div className={styles.scene} aria-hidden="true">
         <video className={styles.video} autoPlay loop muted playsInline preload="metadata" poster="/gate-assets/whitegate-calm-poster-tr.webp">
           <source src={VIDEO_URL} type="video/mp4" />
@@ -132,12 +135,12 @@ export function WhiteGateCalmHero({ content }: { content: NokiaContent }) {
         <span>Bir mesajdan bir fikre...</span>
       </div>
       <div className={styles.content}>
-        <h1 id="whitegate-calm-title">Şirketinizi<br />AI çağına taşıyoruz.</h1>
+        <h1 id="whitegate-calm-title">{locale === "en" ? <>Your business.<br />Ready for the AI era.</> : <>Şirketinizi<br />AI çağına taşıyoruz.</>}</h1>
         <p>Ekibinizin her gün yaptığı işlerde AI'ın nerede yardımcı olacağını belirliyoruz. Size özel uygulamalar ve agentlar geliştirip ekibinizle kullanıma alıyoruz.</p>
         <Link className={styles.primaryCta} href="/iletisim"><span>İlk uygulamayı konuşalım</span><span aria-hidden="true">↗</span></Link>
         <Link className={styles.mobileCaseLink} href="/yayinlar/nokia-3310-ile-sirket-yonetmek">{content.nokiaMobileLink}</Link>
       </div>
-      <Link className={styles.caseCard} href="/yayinlar/nokia-3310-ile-sirket-yonetmek" aria-label={`${content.nokiaCardTitle}: yazıyı oku`}>
+      <Link className={styles.caseCard} href="/yayinlar/nokia-3310-ile-sirket-yonetmek" aria-label={`${content.nokiaCardTitle}: ${locale === "en" ? "read article" : "yazıyı oku"}`}>
         <img src="/gate-assets/nokia-sms-doodle.webp" alt="" width="650" height="464" />
         <strong>{content.nokiaCardTitle}</strong>
         <span className={styles.caseHint}>{content.nokiaCardHint}</span>
@@ -150,5 +153,5 @@ export function WhiteGateCalmHero({ content }: { content: NokiaContent }) {
         </svg>
       </div>
     </section>
-  );
+  ), locale);
 }

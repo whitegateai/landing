@@ -1,3 +1,4 @@
+import { localizeData, localizedHref, translate, type Locale } from "./i18n";
 import { canonicalHomePageContent } from "./home-content";
 import { servicePages } from "./services";
 import { SITE_NAME, SITE_URL, organizationJsonLd } from "./seo";
@@ -14,7 +15,7 @@ export const machineNavigation = [
 ];
 export const machineEmail = organizationJsonLd["@graph"][0].email!;
 
-export async function getMachineDocument(path: string): Promise<MachineDocument | null> {
+async function getMachineDocumentSource(path: string): Promise<MachineDocument | null> {
   if (path === "home") {
     return {
       title: SITE_NAME,
@@ -51,12 +52,28 @@ export async function getMachineDocument(path: string): Promise<MachineDocument 
   return null;
 }
 
-export function machineMarkdown(document: MachineDocument) {
+export async function getMachineDocument(path: string, locale: Locale = "tr"): Promise<MachineDocument | null> {
+  const source = await getMachineDocumentSource(path);
+  if (!source) return null;
+  const document = localizeData(source, locale);
+  document.humanPath = localizedHref(document.humanPath, locale);
+  if (locale === "en" && path === "senaryolar") document.sections.forEach(section => {
+    section.title = section.title.split(" / ").map(part => translate(part, locale)).join(" / ");
+  });
+  if (locale === "en" && (path === "home" || path === "iletisim")) {
+    const introduction = "Let's find the first real job AI can do in your company.";
+    if (path === "iletisim") document.description = introduction;
+    else document.sections.find(section => section.title === "First step")?.paragraphs?.splice(0, 1, introduction);
+  }
+  return document;
+}
+
+export function machineMarkdown(document: MachineDocument, locale: Locale = "tr") {
   const absolute = (href: string) => href.startsWith("/") ? `${SITE_URL}${href}` : href;
   return [
     `# ${document.title}`, document.description,
-    `Kaynak: ${SITE_URL}${document.humanPath}`,
-    `Ad: ${SITE_NAME}\nDil: Türkçe / tr-TR\nWeb sitesi: ${SITE_URL}\nİletişim: [${machineEmail}](mailto:${machineEmail})`,
+    `${locale === "en" ? "Source" : "Kaynak"}: ${SITE_URL}${document.humanPath}`,
+    locale === "en" ? `Name: ${SITE_NAME}\nLanguage: English / en-US\nWebsite: ${SITE_URL}/en\nContact: [${machineEmail}](mailto:${machineEmail})` : `Ad: ${SITE_NAME}\nDil: Türkçe / tr-TR\nWeb sitesi: ${SITE_URL}\nİletişim: [${machineEmail}](mailto:${machineEmail})`,
     ...document.sections.flatMap(section => [
       `## ${section.title}`, ...(section.paragraphs || []),
       ...(section.items || []).map(item => `- ${item.href ? `[${item.title}](${absolute(item.href)})` : item.title}${item.text ? `: ${item.text}` : ""}`),

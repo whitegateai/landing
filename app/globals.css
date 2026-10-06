@@ -468,6 +468,7 @@ html.gate-arrival-pending .preload:not(#gate-transition-preload) { display: none
     letter-spacing: .06em;
     content: "KATEGORİLERİ KAYDIR  →";
   }
+  html[lang="en"] body .blog-tabs::before { content: "SCROLL CATEGORIES  →"; }
 
   .blog-tab-menu {
     scrollbar-width: none;
@@ -519,8 +520,6 @@ html.gate-arrival-pending .preload:not(#gate-transition-preload) { display: none
 
   .navbar .nav-menu-wrap { width: 100%; align-items: stretch; }
   .navbar .nav-menu .navlink { width: 100%; min-height: 44px; align-items: center; border-bottom: 1px solid #e2e8eb; }
-  .navbar .nav-button-wrapper.mobile { width: 100%; margin-top: 1rem; }
-  .navbar .nav-button-wrapper.mobile .button-nav { width: 100%; min-height: 44px; justify-content: space-between; }
 
   .whitegate-home-logo { width: 32px; height: 32px; }
   .whitegate-home-name { font-size: 19px; }
@@ -588,6 +587,31 @@ html.gate-arrival-pending .preload:not(#gate-transition-preload) { display: none
   .footer .footer-bottom-credit {
     justify-self: auto;
   }
+}
+
+/* Contact belongs to the menu; language stays at the screen's top-right edge. */
+.navbar .navbar-container { align-items: center; }
+@media (min-width: 992px) {
+  html body .navbar .nav-menu { min-width: 0; flex: 0 1 auto; margin-inline: 0; }
+  .navbar .nav-menu-wrap { flex-wrap: wrap; }
+  .navbar .nav-menu-wrap > .navlink:last-child { border-right: 1px solid #30343a; }
+  .navbar .navbar-container > [data-language-switch] { position: absolute; right: max(16px, env(safe-area-inset-right)); top: 0; }
+}
+@media (max-width: 991px) {
+  .navbar .navbar-container { gap: 8px; }
+  .navbar .navbar-container > [data-language-switch] { order: 2; margin-left: 0; }
+  .navbar .navbar-container > .nav_menu-button { order: 1; margin-left: auto; }
+  html body .page-wrapper .navbar { padding-inline: 12px; }
+  html body .navbar .navbar-container > .navbar-brand-link { width: auto; min-width: 0; }
+}
+@media (min-width: 992px) and (max-width: 1100px) {
+  html body .page-wrapper .navbar { padding-inline: 3%; }
+}
+@media (max-width: 380px) {
+  html body .page-wrapper .navbar .whitegate-home-logo { display: none; }
+  html body .page-wrapper .navbar .whitegate-home-name,
+  html body .page-wrapper .navbar .hero-top-logo-img.whitegate-wordmark { font-size: 17px; }
+  html body .navbar .navbar-container { gap: 6px; }
 }
 
 @media screen and (max-width: 479px) {

@@ -17,7 +17,7 @@ export function createPageMetadata({
   return {
     title,
     description,
-    alternates: { canonical: path },
+    alternates: { canonical: path, languages: { tr: path, en: `/en${path === "/" ? "" : path}`, "x-default": path } },
     openGraph: {
       title,
       description,

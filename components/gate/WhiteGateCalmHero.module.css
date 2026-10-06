@@ -117,6 +117,13 @@
   text-align: center;
   white-space: nowrap;
 }
+
+.hero[data-locale="en"] .phoneMessage {
+  left: 44%;
+  width: 10%;
+  font-size: clamp(10px, .9vw, 15px);
+  text-align: center;
+}
 .cursor {
   display: inline-block;
   width: .42em;
@@ -261,6 +268,7 @@
   .primaryCta { width: min(100%, 330px); min-height: 54px; margin: 19px auto 0; font-size: 14px; }
   .content .mobileCaseLink { display: inline-block; margin-top: 12px; color: #435362; font: 500 11px/1.2 Geist, Arial, sans-serif; text-decoration: underline; text-underline-offset: 3px; pointer-events: auto; }
   .phoneMessage { left: 45.3%; width: 30%; transform: translateX(-50%); font-size: clamp(6.5px, calc(2.1vw - 1px), 8px); text-align: center; }
+  .hero[data-locale="en"] .phoneMessage { left: 45.3%; width: 30%; font-size: clamp(6px, calc(1.9vw - 1px), 7px); }
   .readLabel { top: 72.6%; left: 44.5%; font-size: 13px; }
   .scrollDoodle { display: none; }
 }

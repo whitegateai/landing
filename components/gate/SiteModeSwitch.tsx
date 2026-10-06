@@ -3,6 +3,9 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import styles from "./SiteModeSwitch.module.css";
+import { useLocale } from "./LocaleProvider";
+import { localizedHref, unlocalizedPath } from "@/lib/i18n";
+import { installMachineExit } from "./machine-exit";
 
 const servicePaths = new Set([
   "/hizmetler/ozel-yazilim-gelistirme",
@@ -27,9 +30,14 @@ export function SiteModeSwitch({ mode, humanHref = "/", machineHref = "/ai/home"
   machineHref?: string;
 }) {
   const pathname = usePathname();
+  const locale = useLocale();
   const wrapper = useRef<HTMLDivElement>(null);
   const [nearFooter, setNearFooter] = useState(false);
   const [hasFocus, setHasFocus] = useState(false);
+
+  useEffect(() => {
+    if (mode === "machine") return installMachineExit(document, window);
+  }, [mode]);
 
   useEffect(() => {
     if (mode !== "human") return;
@@ -56,7 +64,9 @@ export function SiteModeSwitch({ mode, humanHref = "/", machineHref = "/ai/home"
   }, [mode, pathname]);
 
   const footerHidden = nearFooter && !hasFocus;
-  const targetMachineHref = mode === "human" && pathname ? pairedMachineHref(pathname, machineHref) : machineHref;
+  const targetMachineHref = localizedHref(mode === "human" && pathname ? pairedMachineHref(unlocalizedPath(pathname), machineHref) : machineHref, locale);
+  const humanLabel = locale === "tr" ? "İNSAN" : "HUMAN";
+  const machineLabel = locale === "tr" ? "MAKİNE" : "MACHINE";
 
   return <div
     ref={wrapper}
@@ -69,9 +79,9 @@ export function SiteModeSwitch({ mode, humanHref = "/", machineHref = "/ai/home"
       if (!(event.relatedTarget instanceof Node) || !wrapper.current?.contains(event.relatedTarget)) setHasFocus(false);
     }}
   >
-    <nav className={styles.switch} aria-label="Site görünümü">
-      {mode === "human" ? <span lang="en" aria-current="page">HUMAN</span> : <a href={humanHref} lang="en" tabIndex={footerHidden ? -1 : undefined}>HUMAN</a>}
-      {mode === "machine" ? <span lang="en" aria-current="page">MACHINE</span> : <a href={targetMachineHref} lang="en" tabIndex={footerHidden ? -1 : undefined}>MACHINE</a>}
+    <nav className={styles.switch} aria-label={locale === "tr" ? "Site görünümü" : "Site view"}>
+      {mode === "human" ? <span aria-current="page">{humanLabel}</span> : <a data-human-return="" href={localizedHref(humanHref, locale)} tabIndex={footerHidden ? -1 : undefined}>{humanLabel}</a>}
+      {mode === "machine" ? <span aria-current="page">{machineLabel}</span> : <a href={targetMachineHref} tabIndex={footerHidden ? -1 : undefined}>{machineLabel}</a>}
     </nav>
   </div>;
 }

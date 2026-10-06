@@ -43,5 +43,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...cases.map((item) => ({ url: `${SITE_URL}/vaka-analizleri/${item.slug}`, lastModified: item.publishedAt })),
   ];
 
-  return [...new Map(entries.map((entry) => [entry.url, entry])).values()];
+  return [...new Map(entries.map((entry) => [entry.url, entry])).values()].flatMap(entry => {
+    const path = entry.url.slice(SITE_URL.length);
+    const englishUrl = `${SITE_URL}/en${path}`;
+    const alternates = { languages: { tr: entry.url, en: englishUrl, "x-default": entry.url } };
+    return [{ ...entry, alternates }, { ...entry, url: englishUrl, alternates }];
+  });
 }

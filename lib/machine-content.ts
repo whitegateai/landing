@@ -22,6 +22,11 @@ export async function getMachineDocument(path: string): Promise<MachineDocument 
       humanPath: "/",
       sections: [
         { title: "WhiteGate ne yapar?", paragraphs: [canonicalHomePageContent.heroDescription] },
+        { title: "Nasıl çalışıyoruz?", items: [
+          { title: "Planlıyoruz", text: "İlk uygulama belirsizse ayrı kapsamı ve bedeli olan AI Dönüşüm Planı hazırlarız. İhtiyaç netse doğrudan uygulama kapsamı ve teklifine geçeriz." },
+          { title: "Geliştiriyoruz", text: "Size özel AI uygulamaları ve agentlar geliştiriyoruz. Şirket bilgilerinizle çalışmasını sağlıyor, gereken araçlara bağlıyor ve gerçek işlerle deniyoruz." },
+          { title: "Kullanıma alıyoruz", text: "Ekibe uygulamayı kendi işleri üzerinde kullanmayı gösterir, günlük kullanımı başlatır ve ilk sorunları gideririz. Kullanım rehberi ve ilk destek teklifteki kapsamla teslim edilir. Sonraki bakım ve yeni uygulamalar ayrıca kararlaştırılır." },
+        ] },
         { title: "Hizmetler", items: servicePages.map(service => ({ title: service.title, text: service.description, href: `/ai/hizmetler/${service.slug}` })) },
         { title: "Örnek uygulamalar", paragraphs: ["Örnek senaryoları inceleyin; her uygulamanın görevi ve insan onayı sınırı ayrı tanımlanır."], items: [{ title: "Örnek senaryolar", href: "/ai/senaryolar" }] },
         { title: "Yayınlar", items: [{ title: "WhiteGate yayınları", text: "AI dönüşümü ve uygulamalarına dair yazılar. Yayınların tam metinleri Human sitededir.", href: "/yayinlar" }] },
@@ -51,6 +56,7 @@ export function machineMarkdown(document: MachineDocument) {
   return [
     `# ${document.title}`, document.description,
     `Kaynak: ${SITE_URL}${document.humanPath}`,
+    `Ad: ${SITE_NAME}\nDil: Türkçe / tr-TR\nWeb sitesi: ${SITE_URL}\nİletişim: [${machineEmail}](mailto:${machineEmail})`,
     ...document.sections.flatMap(section => [
       `## ${section.title}`, ...(section.paragraphs || []),
       ...(section.items || []).map(item => `- ${item.href ? `[${item.title}](${absolute(item.href)})` : item.title}${item.text ? `: ${item.text}` : ""}`),

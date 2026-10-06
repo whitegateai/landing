@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import { notFound } from "next/navigation";
 import { SiteModeSwitch } from "@/components/gate/SiteModeSwitch";
 import { getMachineDocument, machineDocumentPaths, machineEmail, machineNavigation } from "@/lib/machine-content";
@@ -55,14 +56,14 @@ export default async function MachinePage({ params }: Props) {
         <div className={styles.formats}><a href={`/ai/markdown/${path}`}>[Markdown]</a><a href={document.humanPath}>[Human]</a><a href="/llms.txt">[llms.txt]</a></div>
       </div>
       <dl className={styles.facts}><div><dt lang="en">name</dt><dd lang="en">WhiteGate AI</dd></div><div><dt lang="en">language</dt><dd>Türkçe / tr-TR</dd></div><div><dt lang="en">website</dt><dd><a href={SITE_URL} lang="en">whitegateai.com</a></dd></div><div><dt lang="en">contact</dt><dd><a href={`mailto:${machineEmail}`} lang="en">{machineEmail}</a></dd></div></dl>
-      {document.sections.map(section => <section className={styles.section} key={section.title}>
+      {document.sections.map((section, index) => <section className={styles.section} key={section.title} style={{ "--machine-order": index + 4 } as CSSProperties}>
         <h2><span className={styles.headingPrefix} aria-hidden="true">──</span><span>{machineText(section.title)}</span><span className={styles.headingRule} aria-hidden="true" /></h2>
         {section.paragraphs?.map(paragraph => <p key={paragraph}>{machineText(paragraph)}</p>)}
         {section.items && <ul>{section.items.map(item => <li key={item.title}>{item.href ? <a href={item.href}>{machineText(item.title)}</a> : <strong>{machineText(item.title)}</strong>}{item.text && <p>{machineText(item.text)}</p>}</li>)}</ul>}
       </section>)}
-      <section className={styles.section}><h2><span className={styles.headingPrefix} aria-hidden="true">──</span><span>Agent erişimi</span><span className={styles.headingRule} aria-hidden="true" /></h2><p>Bu görünüm site içeriğini sade HTML olarak sunar. Hizmet metinleri ve örnek senaryolar Human site ile aynı kaynaklardan gelir.</p><ul><li><a href="/llms.txt">/llms.txt</a></li><li><a href={`/ai/markdown/${path}`}>Bu sayfanın Markdown metni</a></li><li><a href="/sitemap.xml">/sitemap.xml</a></li></ul></section>
+      <section className={styles.section} style={{ "--machine-order": document.sections.length + 4 } as CSSProperties}><h2><span className={styles.headingPrefix} aria-hidden="true">──</span><span>Agent erişimi</span><span className={styles.headingRule} aria-hidden="true" /></h2><p>Bu görünüm site içeriğini sade HTML olarak sunar. Hizmet metinleri ve örnek senaryolar Human site ile aynı kaynaklardan gelir.</p><ul><li><a href="/llms.txt">/llms.txt</a></li><li><a href={`/ai/markdown/${path}`}>Bu sayfanın Markdown metni</a></li><li><a href="/sitemap.xml">/sitemap.xml</a></li></ul></section>
     </main>
-    <footer className={styles.footer}><span aria-hidden="true">────────────────────────────────</span><span lang="en">WhiteGate AI // EOF</span></footer>
+    <footer className={styles.footer} style={{ "--machine-order": document.sections.length + 5 } as CSSProperties}><span aria-hidden="true">────────────────────────────────</span><span lang="en">WhiteGate AI // EOF</span></footer>
     </div>
     <SiteModeSwitch mode="machine" humanHref={document.humanPath} machineHref={`/ai/${path}`} />
   </div>;

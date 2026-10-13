@@ -25,6 +25,7 @@ export function TeamPortrait({ src, avatarSrc, alt }: Props) {
     let cellSize = 14;
     let animation = 0;
     let previous: Point | null = null;
+    let activeTouch: number | null = null;
     let loaded = false;
     let requested = false;
     const lifetime = 1500;
@@ -94,13 +95,19 @@ export function TeamPortrait({ src, avatarSrc, alt }: Props) {
     };
 
     const move = (event: PointerEvent) => {
-      if (!finePointer.matches || event.pointerType === "touch") return;
+      if (event.pointerType === "touch") {
+        if (activeTouch !== event.pointerId) return;
+      } else if (!finePointer.matches) return;
       if (!requested) {
         requested = true;
         avatar.src = avatarSrc;
       }
       const bounds = frame.getBoundingClientRect();
       const point = { x: event.clientX - bounds.left, y: event.clientY - bounds.top };
+      if (point.x < 0 || point.y < 0 || point.x >= width || point.y >= height) {
+        previous = null;
+        return;
+      }
       const now = performance.now();
       if (reducedMotion.matches) pixels.clear();
       if (previous && !reducedMotion.matches) {
@@ -118,6 +125,23 @@ export function TeamPortrait({ src, avatarSrc, alt }: Props) {
       previous = null;
       if (reducedMotion.matches) clear();
     };
+    const startTouch = (event: PointerEvent) => {
+      if (event.pointerType !== "touch" || !event.isPrimary || activeTouch !== null) return;
+      activeTouch = event.pointerId;
+      previous = null;
+      frame.setPointerCapture(event.pointerId);
+      move(event);
+    };
+    const finishTouch = (event: PointerEvent) => {
+      if (activeTouch !== event.pointerId) return;
+      activeTouch = null;
+      if (frame.hasPointerCapture(event.pointerId)) frame.releasePointerCapture(event.pointerId);
+      leave();
+    };
+    const cancel = (event: PointerEvent) => {
+      finishTouch(event);
+      clear();
+    };
     avatar.onload = () => {
       loaded = true;
       if (pixels.size && !animation) animation = requestAnimationFrame(paint);
@@ -126,10 +150,15 @@ export function TeamPortrait({ src, avatarSrc, alt }: Props) {
     const observer = new ResizeObserver(resize);
     observer.observe(frame);
     resize();
+    // Reserve dragging only on the photo; the rest of the page still scrolls.
+    frame.classList.add(styles.touchSurface);
+    frame.addEventListener("pointerdown", startTouch);
+    frame.addEventListener("pointerup", finishTouch);
+    frame.addEventListener("lostpointercapture", finishTouch);
     frame.addEventListener("pointermove", move);
     frame.addEventListener("pointerenter", move);
     frame.addEventListener("pointerleave", leave);
-    frame.addEventListener("pointercancel", clear);
+    frame.addEventListener("pointercancel", cancel);
     finePointer.addEventListener("change", clear);
     reducedMotion.addEventListener("change", clear);
     return () => {
@@ -137,17 +166,21 @@ export function TeamPortrait({ src, avatarSrc, alt }: Props) {
       observer.disconnect();
       avatar.onload = null;
       avatar.onerror = null;
+      frame.classList.remove(styles.touchSurface);
+      frame.removeEventListener("pointerdown", startTouch);
+      frame.removeEventListener("pointerup", finishTouch);
+      frame.removeEventListener("lostpointercapture", finishTouch);
       frame.removeEventListener("pointermove", move);
       frame.removeEventListener("pointerenter", move);
       frame.removeEventListener("pointerleave", leave);
-      frame.removeEventListener("pointercancel", clear);
+      frame.removeEventListener("pointercancel", cancel);
       finePointer.removeEventListener("change", clear);
       reducedMotion.removeEventListener("change", clear);
     };
   }, [avatarSrc]);
 
   return <>
-    <img loading="lazy" src={src} alt={alt} className="team-card-img" />
+    <img loading="lazy" src={src} alt={alt} className="team-card-img" draggable={false} />
     <canvas ref={canvasRef} className={styles.reveal} aria-hidden="true" />
   </>;
 }

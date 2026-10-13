@@ -1,4 +1,8 @@
 html.w-mod-js:not(.w-mod-ix3) :is(.team-card-position, .install-process-line) { visibility: hidden !important; }
+/* Touch scrolling must not paint decorative hover tiles over mobile copy. */
+@media (hover: none) and (pointer: coarse) {
+  .pixel-grid .pixel-box-color { opacity: 0 !important; }
+}
 @font-face {
   font-family: "Geist Pixel Circle";
   src: url("/gate-assets/GeistPixel-Circle.woff2") format("woff2");
@@ -598,6 +602,31 @@ html.gate-arrival-pending .preload:not(#gate-transition-preload) { display: none
   .navbar .navbar-container > [data-language-switch] { position: absolute; right: max(16px, env(safe-area-inset-right)); top: 0; }
 }
 @media (max-width: 991px) {
+  html body .navbar .nav-menu[data-mobile-nav="closed"] { display: none !important; }
+  html body .navbar .nav-menu[data-mobile-nav="open"] {
+    display: block !important;
+    position: absolute !important;
+    inset: 72px 12px auto !important;
+    width: auto !important;
+    height: auto !important;
+    max-height: calc(100dvh - 88px - env(safe-area-inset-bottom));
+    margin: 0 !important;
+    padding: .5rem .75rem !important;
+    transform: none !important;
+    border: 1px solid #d7e0e4;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 16px 36px rgb(20 55 71 / 14%);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .navbar .nav-menu[data-mobile-nav] .nav-menu-wrap { margin-bottom: 0; gap: 0; }
+  .navbar .nav-menu[data-mobile-nav] .navlink { min-height: 48px; padding-inline: .75rem; }
+  .navbar .nav-menu[data-mobile-nav] .navlink:last-child { border-bottom: 0; }
+  .navbar .nav-menu[data-mobile-nav] .navlink[aria-current="page"] { background: #edf6fa; }
+  #email-form :is(input:not([type="submit"]), textarea, select) { font-size: 16px; }
+  body:has(.navbar[data-mobile-menu-open]) [data-site-mode-switch],
+  body:has(#email-form :focus) [data-site-mode-switch] { opacity: 0; visibility: hidden; }
   .navbar .navbar-container { gap: 8px; }
   .navbar .navbar-container > [data-language-switch] { order: 2; margin-left: 0; }
   .navbar .navbar-container > .nav_menu-button { order: 1; margin-left: auto; }

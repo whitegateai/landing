@@ -5,7 +5,6 @@ import type React from "react";
 import type { HomePageContent } from "@/sanity/lib/homePage";
 import { canonicalHomePageContent } from "@/lib/home-content";
 import { WhiteGateCalmHero } from "@/components/gate/WhiteGateCalmHero";
-import { HomeNavMobileBehavior } from "@/components/gate/HomeNavMobileBehavior";
 import { ApplicationStrip } from "@/components/gate/ApplicationStrip";
 
 type ResolvedHomePageContent = Required<HomePageContent>;
@@ -23,7 +22,7 @@ export function HomePage({ content }: { content?: HomePageContent }) {
     ctaWords: content?.ctaWords?.filter(Boolean).length ? content.ctaWords.filter(Boolean) : defaultContent.ctaWords,
     scenarioCards: content?.scenarioCards?.length ? content.scenarioCards : defaultContent.scenarioCards,
   };
-  return (localizeTree(<><div className="page-wrapper whitegate-home"><HomeGlobalStyles /><HomeNav /><HomeNavMobileBehavior /><HomeMainWrapper content={resolvedContent} /></div></>, getLocale()));
+  return (localizeTree(<><div className="page-wrapper whitegate-home"><HomeGlobalStyles /><HomeNav /><HomeMainWrapper content={resolvedContent} /></div></>, getLocale()));
 }
 
 function HomeGlobalStyles() {
